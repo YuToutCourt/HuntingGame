@@ -1,0 +1,46 @@
+Todo :
+    + Remove pseudo above the head
+    - Coder les gros monstre
+    + Dans la commande ShowPts faire ne sorte quelle soit tier du premier au dernier
+    + Scoreboard
+    + Donner coder de la cible toute les 10 minutes (ou un autre nombre)
+    - Faire le système de pts une fois les mobs trouver
+    + Repenser a l'algo qui donne des targets a tous le monde
+
+
+
+- Trouver les mobs à tué :
+    - Lapin -> Lapin -> 1 pts
+    - Renard -> Ocelot avec plus de pv et dmg
+    - Cerf -> Cow avec plus de pv et dmg
+    - Sanglier -> Pig avec plus de pv et dmg
+    - Loup -> Loup avec plus de pv et dmg
+    - Ours -> Zombie avec plus de pv et dmg
+    - Gros ours -> Enderman avec plus de pv et dmg
+    - Humain -> Humain
+    - ??? -> ???
+    - Boss -> ???
+
+
+---------------------
+§4 -> Dark Red
+§c -> Red
+§6 -> Orange / Gold
+§e -> Yellow
+§2 -> Dark Green
+§a -> Green / Lime
+§b -> Light Blue
+§3 -> Aqua
+§1 -> Dark Blue
+§9 -> Blue
+§d -> Light Purple / Pink
+§5 -> Purple
+§f -> White
+§7 -> Grey
+§8 -> Dark Grey
+§0 -> Black
+§k -> Magick
+§l -> Bold
+§n -> Underline
+§m -> Cross
+§r -> Reset

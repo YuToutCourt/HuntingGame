@@ -1,0 +1,20 @@
+name: Hunting_Game
+version: ${project.version}
+main: com.wongt8.hunting_game.Hunting_Game
+api-version: 1.16
+
+commands:
+  alert:
+    description: Create a broadcast message
+    usage: /alert <message>
+    permission: perm.use
+  rule:
+    description: Rules of the game
+    usage: /rule <1 -> ?>
+  start:
+    description: Start the game
+    usage: /start
+    permission: perm.use
+  pts:
+    description: Show point of all the players
+    usage: /pts or /pts {player}
