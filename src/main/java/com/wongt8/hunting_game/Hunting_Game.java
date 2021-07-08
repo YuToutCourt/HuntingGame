@@ -1,20 +1,17 @@
 package com.wongt8.hunting_game;
 
 import com.wongt8.hunting_game.Command.*;
-import com.wongt8.hunting_game.Event.DamageEvent;
-import com.wongt8.hunting_game.Event.KillEvent;
-import com.wongt8.hunting_game.Event.SpawnCustomEvent;
+import com.wongt8.hunting_game.CustomMob.IronCustomCustom;
+import com.wongt8.hunting_game.Event.EntityEvent;
 import com.wongt8.hunting_game.Event.WinEvent;
 import com.wongt8.hunting_game.Tasks.TimerTasks;
 import fr.mrmicky.fastboard.FastBoard;
 import net.md_5.bungee.api.ChatColor;
 import org.bukkit.Bukkit;
 import org.bukkit.World;
-import org.bukkit.entity.LivingEntity;
 import org.bukkit.entity.Player;
 import org.bukkit.plugin.PluginManager;
 import org.bukkit.plugin.java.JavaPlugin;
-import org.bukkit.scheduler.BukkitRunnable;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -23,7 +20,7 @@ import java.util.List;
 public final class Hunting_Game extends JavaPlugin {
 
     public final List<FastBoard> boards = new ArrayList<FastBoard>();
-    public World WORLD;
+    public static World WORLD;
 
     @Override
     public void onEnable() {
@@ -34,13 +31,11 @@ public final class Hunting_Game extends JavaPlugin {
         this.getCommand("pts").setExecutor(new ShowPtsCommand());
 
         PluginManager pm = this.getServer().getPluginManager();
-        pm.registerEvents(new KillEvent(),this);
         pm.registerEvents(new WinEvent(),this);
-        pm.registerEvents(new SpawnCustomEvent(),this);
-        pm.registerEvents(new DamageEvent(),this);
+        pm.registerEvents(new EntityEvent(this),this);
+        pm.registerEvents(new IronCustomCustom(),this);
 
         this.resetGame();
-        runnable();
 
     }
 
@@ -92,17 +87,5 @@ public final class Hunting_Game extends JavaPlugin {
         }
     }
 
-    public void runnable(){
-        BukkitRunnable task = new BukkitRunnable() {
-            @Override
-            public void run() {
-                for(LivingEntity e: getServer().getWorld("world").getLivingEntities()){
-                    e.setCustomName(e.getType() + "" + ChatColor.DARK_RED + "[" + ChatColor.RED + e.getHealth() +
-                            "§8/§c" + e.getMaxHealth() + "§c]");
-                }
-            }
-        };
-        task.runTaskLater(this, 0);
-    }
 
 }

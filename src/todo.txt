@@ -1,11 +1,12 @@
 Todo :
-    + Remove pseudo above the head
-    - Coder les gros monstre
-    + Dans la commande ShowPts faire ne sorte quelle soit tier du premier au dernier
-    + Scoreboard
-    + Donner coder de la cible toute les 10 minutes (ou un autre nombre)
-    - Faire le système de pts une fois les mobs trouver
-    + Repenser a l'algo qui donne des targets a tous le monde
+    + Coder les gros monstre (Golem)
+    + Disable le spawn auto des Golem. Mais je veux quand même le faire spawn
+    - Système de map ?
+    - Augmenter le spawn de certain mob
+    + Faire le système de pts une fois les mobs trouver
+    + Faire custom mob (Plus de pv et dmg)
+
+
 
 
 
@@ -18,8 +19,8 @@ Todo :
     - Ours -> Zombie avec plus de pv et dmg
     - Gros ours -> Enderman avec plus de pv et dmg
     - Humain -> Humain
-    - ??? -> ???
-    - Boss -> ???
+    - ??? -> Skeleton Custom with sword (or not) and a bit of custom attack and don't take arrow and throw them back to the sender
+    - Boss -> Zombie Custom with custom attack...
 
 
 ---------------------

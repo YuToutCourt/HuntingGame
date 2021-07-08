@@ -1,9 +1,11 @@
 package com.wongt8.hunting_game.Command;
 
+import com.wongt8.hunting_game.CustomMob.IronCustomCustom;
 import org.bukkit.Bukkit;
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandExecutor;
 import org.bukkit.command.CommandSender;
+import org.bukkit.entity.Player;
 
 public class AlertCommand implements CommandExecutor {
 
@@ -22,6 +24,8 @@ public class AlertCommand implements CommandExecutor {
         String message = "§c§l> [SERVER] ";
         for(String letter : args) message += " " + letter;
         Bukkit.broadcastMessage(message);
+        Player player = (Player) sender;
+        IronCustomCustom.spawnCustomSkeleton(player.getLocation());
         return true;
 
     }

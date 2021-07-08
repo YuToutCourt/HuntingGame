@@ -19,8 +19,8 @@ public class StartCommand implements CommandExecutor {
 
     private Hunting_Game main;
 
-    public StartCommand(Hunting_Game uhc) {
-        this.main = uhc;
+    public StartCommand(Hunting_Game game) {
+        this.main = game;
     }
 
     @Override
@@ -38,6 +38,8 @@ public class StartCommand implements CommandExecutor {
         Bukkit.dispatchCommand(Bukkit.getConsoleSender(), "scoreboard teams add pseudo");
         Bukkit.dispatchCommand(Bukkit.getConsoleSender(), "scoreboard teams option pseudo nametagVisibility never");
         Bukkit.dispatchCommand(Bukkit.getConsoleSender(), "scoreboard teams join pseudo @a");
+
+        this.main.WORLD.setGameRuleValue("naturalRegeneration", "false");
 
         Random rand = new Random();
 

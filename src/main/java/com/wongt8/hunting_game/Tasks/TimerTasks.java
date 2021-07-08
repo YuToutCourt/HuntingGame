@@ -32,7 +32,7 @@ public class TimerTasks extends BukkitRunnable {
 		this.updateBoards();
 		
 		if(RUN) {
-			if(time%600 == 0){
+			if(time%300 == 0){
 				for(Map.Entry entry : StartCommand.killerTarget.entrySet()){
 					Player pToSendMessage = Bukkit.getPlayer((UUID) entry.getKey());
 					Player pToLocate = Bukkit.getPlayer((UUID) entry.getValue());
