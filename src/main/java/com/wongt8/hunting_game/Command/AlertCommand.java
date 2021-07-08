@@ -24,7 +24,7 @@ public class AlertCommand implements CommandExecutor {
         String message = "§c§l> [SERVER] ";
         for(String letter : args) message += " " + letter;
         Bukkit.broadcastMessage(message);
-        Player player = (Player) sender;
+    Player player = (Player) sender;
         IronCustomCustom.spawnCustomSkeleton(player.getLocation());
         return true;
 

@@ -1,13 +1,11 @@
 Todo :
-    + Coder les gros monstre (Golem)
-    + Disable le spawn auto des Golem. Mais je veux quand même le faire spawn
-    - Système de map ?
     - Augmenter le spawn de certain mob
+    - Rendre les golem méchant des le début
+    - Système de map ?
     + Faire le système de pts une fois les mobs trouver
     + Faire custom mob (Plus de pv et dmg)
-
-
-
+    + Coder les gros monstre (Golem)
+    + Disable le spawn auto des Golem. Mais je veux quand même le faire spawn
 
 
 - Trouver les mobs à tué :
@@ -19,7 +17,7 @@ Todo :
     - Ours -> Zombie avec plus de pv et dmg
     - Gros ours -> Enderman avec plus de pv et dmg
     - Humain -> Humain
-    - ??? -> Skeleton Custom with sword (or not) and a bit of custom attack and don't take arrow and throw them back to the sender
+    - ??? -> Golem Custom with sword (or not) and a bit of custom attack and don't take arrow and throw them back to the sender
     - Boss -> Zombie Custom with custom attack...
 
 

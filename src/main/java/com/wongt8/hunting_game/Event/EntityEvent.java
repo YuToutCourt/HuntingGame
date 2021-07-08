@@ -27,67 +27,60 @@ public class EntityEvent implements Listener {
 
     @EventHandler
     public void onSpawn(CreatureSpawnEvent event){
-        LivingEntity mobs = event.getEntity();
+        EntityType mobs = event.getEntity().getType();
 
         // CUSTOM MOB
-        //TODO Repalce with SWITCH
-        if (EntityType.RABBIT.equals(mobs.getType())){
-            Rabbit mob = (Rabbit) mobs;
-            mob.setCustomName("§cRabbit");
-        }
-        if(EntityType.OCELOT.equals(mobs.getType())){
-            Ocelot mob = (Ocelot) mobs;
-            mob.setCustomName("§cOCELOT");
-            mob.setMaxHealth(25.0);
-            mob.setHealth(25.0);
-        }
-        if(EntityType.COW.equals(mobs.getType())){
-            Cow mob = (Cow) mobs;
-            mob.setCustomName("§cCOW");
-            mob.setMaxHealth(25.0);
-            mob.setHealth(25.0);
-        }
-        if(EntityType.PIG.equals(mobs.getType())){
-            Pig mob = (Pig) mobs;
-            mob.setCustomName("§cPIG");
-            mob.setMaxHealth(30.0);
-            mob.setHealth(30.0);
-        }
-        if(EntityType.WOLF.equals(mobs.getType())){
-            Wolf mob = (Wolf) mobs;
-            mob.setCustomName("§cWolf");
-            mob.setMaxHealth(40.0);
-            mob.setHealth(40.0);
-        }
-        if(EntityType.ZOMBIE.equals(mobs.getType())){
-            Zombie mob = (Zombie) mobs;
-            mob.setCustomName("§cZOMBIE");
-            mob.setMaxHealth(60.0);
-            mob.setHealth(60.0);
-        }
-        if(EntityType.ENDERMAN.equals(mobs.getType())){
-            Enderman mob = (Enderman) mobs;
-            mob.setCustomName("§cENDERMAN");
-            mob.setMaxHealth(80.0);
-            mob.setHealth(80.0);
+
+        switch (mobs){
+            case RABBIT:
+                Rabbit ra = (Rabbit) event.getEntity();
+                ra.setCustomName("§cRabbit");
+                return;
+
+            case OCELOT:
+                Ocelot oc = (Ocelot) event.getEntity();
+                oc.setCustomName("§cOCELOT");
+                oc.setMaxHealth(25.0);
+                oc.setHealth(25.0);
+                return;
+
+            case COW:
+                Cow cow = (Cow) event.getEntity();;
+                cow.setCustomName("§cCOW");
+                cow.setMaxHealth(25.0);
+                cow.setHealth(25.0);
+                return;
+
+            case PIG:
+                Pig pig = (Pig) event.getEntity();
+                pig.setCustomName("§cPIG");
+                pig.setMaxHealth(30.0);
+                pig.setHealth(30.0);
+                return;
+
+            case WOLF:
+                Wolf wolf =(Wolf) event.getEntity();
+                wolf.setCustomName("§cWolf");
+                wolf.setMaxHealth(40.0);
+                wolf.setHealth(40.0);
+
+            case ZOMBIE:
+                Zombie zom = (Zombie) event.getEntity();
+                zom.setCustomName("§cZOMBIE");
+                zom.setMaxHealth(60.0);
+                zom.setHealth(60.0);
+            case ENDERMAN:
+                Enderman ender = (Enderman) event.getEntity();
+                ender.setCustomName("§cENDERMAN");
+                ender.setMaxHealth(80.0);
+                ender.setHealth(80.0);
+
+            // CANCEL SPAWN OF SOME MOBS
+            case CHICKEN:
+                event.setCancelled(true);
         }
 
-        // CANCEL SPAWN OF SOME MOBS
 
-        if(EntityType.CHICKEN.equals(mobs.getType())){
-            event.setCancelled(true);
-        }
-        else if(EntityType.IRON_GOLEM.equals(mobs.getType())) {
-            BukkitRunnable task = new BukkitRunnable(){
-                @Override
-                public void run() {
-                    if(mobs.getCustomName() == null){
-                        mobs.setHealth(0);
-                    }
-                }
-            };
-            task.runTaskLater(this.main,1);
-        }
 
     }
 
@@ -142,31 +135,21 @@ public class EntityEvent implements Listener {
     public void onDamage(EntityDamageByEntityEvent event){
         EntityType mob = event.getDamager().getType();
 
-        //TODO Repalce with SWITCH
-        if(mob.equals(EntityType.OCELOT)){
-            event.setDamage(2.0);
+        switch (mob){
+            case OCELOT:
+                event.setDamage(2.0);
+            case COW:
+                event.setDamage(3.0);
+            case PIG:
+                event.setDamage(4.0);
+            case WOLF:
+                event.setDamage(5.0);
+            case ZOMBIE:
+                event.setDamage(6.0);
+            case ENDERMAN:
+                event.setDamage(7.0);
+
         }
-        if(mob.equals(EntityType.COW)){
-            event.setDamage(3.0);
-        }
-        if(mob.equals(EntityType.PIG)){
-            event.setDamage(4.0);
-        }
-        if(mob.equals(EntityType.WOLF)){
-            event.setDamage(5.0);
-        }
-        if(mob.equals(EntityType.ZOMBIE)){
-            event.setDamage(6.0);
-        }
-        if(mob.equals(EntityType.ENDERMAN)){
-            event.setDamage(7.0);
-        }
-        /*
-        if(mob.equals(EntityType.WOLF)){
-            event.setDamage(5.0);
-        }
-        if(mob.equals(EntityType.WOLF)){
-            event.setDamage(5.0);
-         */
+
     }
 }

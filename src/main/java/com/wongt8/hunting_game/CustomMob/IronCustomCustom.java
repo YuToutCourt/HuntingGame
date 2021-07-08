@@ -1,17 +1,13 @@
 package com.wongt8.hunting_game.CustomMob;
 
 import com.wongt8.hunting_game.Hunting_Game;
-import org.bukkit.Bukkit;
 import org.bukkit.Location;
-import org.bukkit.Material;
 import org.bukkit.entity.*;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
 import org.bukkit.event.entity.EntityDamageByEntityEvent;
-import org.bukkit.inventory.ItemStack;
 import org.bukkit.potion.PotionEffect;
 import org.bukkit.potion.PotionEffectType;
-import org.bukkit.util.Vector;
 
 import java.util.Random;
 
@@ -39,9 +35,7 @@ public class IronCustomCustom implements Listener {
         }
     }
 
-
     public static void spawnCustomSkeleton(Location location){
-        //TODO Create a Custom Iron Golem
 
         IronGolem golem = Hunting_Game.WORLD.spawn(location,IronGolem.class);
         golem.setCustomName("§k???");
