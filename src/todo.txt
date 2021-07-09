@@ -1,6 +1,5 @@
 Todo :
     - Augmenter le spawn de certain mob
-    - Rendre les golem méchant des le début
     - Système de map ?
     + Faire le système de pts une fois les mobs trouver
     + Faire custom mob (Plus de pv et dmg)
@@ -18,7 +17,7 @@ Todo :
     - Gros ours -> Enderman avec plus de pv et dmg
     - Humain -> Humain
     - ??? -> Golem Custom with sword (or not) and a bit of custom attack and don't take arrow and throw them back to the sender
-    - Boss -> Zombie Custom with custom attack...
+    - Boss -> Skelete Custom with custom attack...
 
 
 ---------------------

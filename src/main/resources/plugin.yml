@@ -18,3 +18,6 @@ commands:
   pts:
     description: Show point of all the players
     usage: /pts or /pts {player}
+  createSpawn:
+    description: Create spawn
+    usage: /createSpawn

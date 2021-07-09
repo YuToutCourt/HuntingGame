@@ -64,6 +64,7 @@ public class StartCommand implements CommandExecutor {
             player.setExp(0);
             Inventory inv = player.getInventory();
             inv.clear();
+            this.main.playersInTheParty.add(player.getUniqueId());
             i++;
         }
         this.main.WORLD.setDifficulty(Difficulty.HARD);

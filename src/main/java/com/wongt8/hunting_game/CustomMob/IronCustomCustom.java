@@ -50,9 +50,6 @@ public class IronCustomCustom implements Listener {
     }
 
 
-
-
-
     public static void spawnCustomSkeleton(Location location){
 
         IronGolem golem = Hunting_Game.WORLD.spawn(location,IronGolem.class);

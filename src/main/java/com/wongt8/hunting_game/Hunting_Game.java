@@ -3,11 +3,13 @@ package com.wongt8.hunting_game;
 import com.wongt8.hunting_game.Command.*;
 import com.wongt8.hunting_game.CustomMob.IronCustomCustom;
 import com.wongt8.hunting_game.Event.EntityEvent;
+import com.wongt8.hunting_game.Event.PlayerEvent;
 import com.wongt8.hunting_game.Event.WinEvent;
 import com.wongt8.hunting_game.Tasks.TimerTasks;
 import fr.mrmicky.fastboard.FastBoard;
 import net.md_5.bungee.api.ChatColor;
 import org.bukkit.Bukkit;
+import org.bukkit.GameMode;
 import org.bukkit.World;
 import org.bukkit.entity.Player;
 import org.bukkit.plugin.PluginManager;
@@ -15,11 +17,13 @@ import org.bukkit.plugin.java.JavaPlugin;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.UUID;
 
 
 public final class Hunting_Game extends JavaPlugin {
 
     public final List<FastBoard> boards = new ArrayList<FastBoard>();
+    public final List<UUID> playersInTheParty = new ArrayList<UUID>();
     public static World WORLD;
 
     @Override
@@ -29,11 +33,13 @@ public final class Hunting_Game extends JavaPlugin {
         this.getCommand("rule").setExecutor(new RuleCommand());
         this.getCommand("start").setExecutor(new StartCommand(this));
         this.getCommand("pts").setExecutor(new ShowPtsCommand());
+        this.getCommand("createSpawn").setExecutor(new CreateSpawnCommand(this));
 
         PluginManager pm = this.getServer().getPluginManager();
         pm.registerEvents(new WinEvent(),this);
         pm.registerEvents(new EntityEvent(this),this);
         pm.registerEvents(new IronCustomCustom(),this);
+        pm.registerEvents(new PlayerEvent(this),this);
 
         this.resetGame();
 
@@ -47,6 +53,10 @@ public final class Hunting_Game extends JavaPlugin {
 
     public void resetGame() {
         WORLD = Bukkit.getWorld("world");
+
+        WORLD.setSpawnLocation(0, 250, 0);
+        WORLD.getWorldBorder().setCenter(WORLD.getSpawnLocation());
+        WORLD.getWorldBorder().setSize(2000);
 
         // Reset scoreboard
         for(FastBoard board : this.boards) {
@@ -85,6 +95,14 @@ public final class Hunting_Game extends JavaPlugin {
                 return;
             }
         }
+    }
+
+    public int getAlivePlayer(){
+        int pAlive = 0;
+        for(Player player : Bukkit.getOnlinePlayers()){
+            if(player.getGameMode().equals(GameMode.SURVIVAL)) pAlive++;
+        }
+        return pAlive;
     }
 
 

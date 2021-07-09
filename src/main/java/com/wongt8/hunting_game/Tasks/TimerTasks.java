@@ -3,10 +3,7 @@ package com.wongt8.hunting_game.Tasks;
 import com.wongt8.hunting_game.Command.StartCommand;
 import com.wongt8.hunting_game.CountPoint.CountPoint;
 import com.wongt8.hunting_game.Hunting_Game;
-import org.bukkit.Bukkit;
-import org.bukkit.Location;
-import org.bukkit.Sound;
-import org.bukkit.ChatColor;
+import org.bukkit.*;
 import org.bukkit.entity.Player;
 import org.bukkit.scheduler.BukkitRunnable;
 
@@ -32,13 +29,14 @@ public class TimerTasks extends BukkitRunnable {
 		this.updateBoards();
 		
 		if(RUN) {
-			if(time%300 == 0){
+			if(time%10 == 0){
 				for(Map.Entry entry : StartCommand.killerTarget.entrySet()){
 					Player pToSendMessage = Bukkit.getPlayer((UUID) entry.getKey());
 					Player pToLocate = Bukkit.getPlayer((UUID) entry.getValue());
-					Location location = pToLocate.getLocation();
-					pToSendMessage.sendMessage("§eCoordonate of your target : §c§lx §r§6> " + location.getBlockX() + "§f, §c§ly §r§6> " + location.getBlockY() + "§f, §c§lz §r§6> " + location.getBlockZ());
-				}
+					if(pToLocate != null && pToLocate.getGameMode().equals(GameMode.SURVIVAL) && pToSendMessage != null){
+						Location location = pToLocate.getLocation();
+						pToSendMessage.sendMessage("§eCoordonate of your target : §c§lx §r§6> " + location.getBlockX() + "§f, §c§ly §r§6> " + location.getBlockY() + "§f, §c§lz §r§6> " + location.getBlockZ());
+					}				}
 			}
 			time ++;
 
@@ -80,8 +78,8 @@ public class TimerTasks extends BukkitRunnable {
 				board.updateLine(3, formatLine("Rank", CountPoint.getClassementOf(board.getPlayer().getUniqueId())));
 				board.updateLine(4, formatLine("Your point", CountPoint.getPtsOf(board.getPlayer().getUniqueId())));
 			}
-
-			board.updateLine(6, formatLine("PvP", "ON", ChatColor.GREEN));
+			board.updateLine(6, formatLine("Players", this.main.getAlivePlayer()));
+			board.updateLine(8, formatLine("PvP", "ON", ChatColor.GREEN));
         }
 	}
 }
