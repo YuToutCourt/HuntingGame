@@ -1,8 +1,8 @@
 Todo :
     - Augmenter le spawn de certain mob (3)
     - Faire le boss (4)
-    - Finir la commande start (Tp joueur sur le start) (2)
-    - WorldBorder (1)
+    + Finir la commande start (Tp joueur sur le start) (2)
+    + WorldBorder (1)
 
 
 - Trouver les mobs à tué :

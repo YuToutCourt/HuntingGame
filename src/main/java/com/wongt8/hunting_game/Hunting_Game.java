@@ -56,10 +56,7 @@ public final class Hunting_Game extends JavaPlugin {
 
     public void resetGame() {
         WORLD = Bukkit.getWorld("world");
-
         WORLD.setSpawnLocation(0, 250, 0);
-        WORLD.getWorldBorder().setCenter(WORLD.getSpawnLocation());
-        WORLD.getWorldBorder().setSize(2000);
 
         // Reset scoreboard
         for(FastBoard board : this.boards) {

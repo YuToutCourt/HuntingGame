@@ -3,15 +3,13 @@ package com.wongt8.hunting_game.Command;
 import com.wongt8.hunting_game.CountPoint.CountPoint;
 import com.wongt8.hunting_game.Hunting_Game;
 import com.wongt8.hunting_game.Tasks.TimerTasks;
-import org.bukkit.Achievement;
-import org.bukkit.Bukkit;
-import org.bukkit.Difficulty;
-import org.bukkit.GameMode;
+import org.bukkit.*;
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandExecutor;
 import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;
 import org.bukkit.inventory.Inventory;
+import org.bukkit.inventory.ItemStack;
 import org.bukkit.potion.PotionEffect;
 
 import java.util.*;
@@ -51,6 +49,15 @@ public class StartCommand implements CommandExecutor {
 
         for(Player player : Bukkit.getOnlinePlayers()){listeOfPlayer.add(player.getUniqueId());}
 
+        this.main.WORLD.setDifficulty(Difficulty.PEACEFUL);
+        this.main.WORLD.setTime(0);
+        this.main.WORLD.getWorldBorder().setCenter(this.main.WORLD.getSpawnLocation());
+        this.main.WORLD.getWorldBorder().setSize(listeOfPlayer.size()*100);
+        int borderSize = (listeOfPlayer.size()*100)/2;
+
+        Bukkit.dispatchCommand(Bukkit.getConsoleSender(), "spreadplayers 0 0 " + borderSize / 10 + " "+ (borderSize - 10) +" false @a"); //x z DistanceEntreChaquePlayer MaxRangeSurLaTp team?
+
+
         Collections.shuffle(listeOfPlayer);
         int i = 0;
         for(Player player : Bukkit.getOnlinePlayers()){
@@ -74,13 +81,15 @@ public class StartCommand implements CommandExecutor {
             player.setExp(0);
             Inventory inv = player.getInventory();
             inv.clear();
+            inv.addItem(new ItemStack(Material.COOKED_BEEF, 64));
             this.main.playersInTheParty.add(player.getUniqueId());
             i++;
         }
-        this.main.WORLD.setDifficulty(Difficulty.HARD);
         TimerTasks timer = new TimerTasks(this.main);
         timer.runTaskTimer(this.main, 0, 20);
         TimerTasks.setRunning(true);
+        for(int j = 0; j < 100; j++) Bukkit.broadcastMessage(" ");
+        Bukkit.broadcastMessage("§l> [SERVER] §cSetting up the game start... ");
         return true;
 
     }

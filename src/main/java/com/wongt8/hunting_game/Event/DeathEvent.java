@@ -47,8 +47,13 @@ public class DeathEvent implements Listener {
                     int classement = CountPoint.getClassementOf((UUID) entry.getKey());
                     CountPoint.pointOfEveryone.get((classement-CountPoint.pointOfEveryone.size())*-1).addPts(100);
                     p.sendMessage("§c§l† §r§aYou target is dead alone ! §r§l+100 pts §c§l††");
-                    return;
-
+                    this.main.playersInTheParty.remove(victim.getUniqueId());
+                    if(this.main.playersInTheParty.size() > 1){
+                        Player newTargetPlayer = Bukkit.getPlayer(nextTarget(p.getUniqueId()));
+                        Location loc = newTargetPlayer.getLocation();
+                        p.sendMessage("§eCoordonate of your new target : §c§lx §r§6> " + loc.getBlockX() + "§f, §c§ly §r§6> " + loc.getBlockY() + "§f, §c§lz §r§6> " + loc.getBlockZ());
+                        StartCommand.killerTarget.replace(p.getUniqueId(),newTargetPlayer.getUniqueId());
+                    }
                 }
             }
         }else{
@@ -73,6 +78,7 @@ public class DeathEvent implements Listener {
                 }
                 // TARGET KILL KILLER
                 if(attacker.equals(Bukkit.getPlayer((UUID) entry.getValue())) && victim.equals(Bukkit.getPlayer((UUID) entry.getKey()))){
+                    this.main.playersInTheParty.remove(victim.getUniqueId());
                     CountPoint.pointOfEveryone.get((classement-CountPoint.pointOfEveryone.size())*-1).addPts(100);
                     CountPoint.pointOfEveryone.get((classement-CountPoint.pointOfEveryone.size())*-1).addKillKiller(1);
                     String message = CountPoint.pointOfEveryone.get((classement-CountPoint.pointOfEveryone.size())*-1).getNbKillerKill() <= 7 ? "§c§l† §r§aYou just killed your killer ! You win §r§l+100 pts + permanent bonus" : "§c§l† §aYou just killed your killer ! You win §r§l+100 pts §c§l†";

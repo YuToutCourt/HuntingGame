@@ -39,6 +39,7 @@ public class TimerTasks extends BukkitRunnable {
 					}
 				}
 			}
+			if(time == 10){ this.main.WORLD.setDifficulty(Difficulty.HARD); }
 			time ++;
 
 		}
