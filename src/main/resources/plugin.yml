@@ -21,3 +21,6 @@ commands:
   createSpawn:
     description: Create spawn
     usage: /createSpawn
+  target:
+    description: Show target
+    usage: /target

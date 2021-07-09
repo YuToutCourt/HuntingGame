@@ -1,6 +1,7 @@
 Todo :
     - Augmenter le spawn de certain mob
     - Système de map ?
+    + New target si tuer target
     + Faire le système de pts une fois les mobs trouver
     + Faire custom mob (Plus de pv et dmg)
     + Coder les gros monstre (Golem)

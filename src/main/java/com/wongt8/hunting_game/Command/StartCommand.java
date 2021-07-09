@@ -3,6 +3,7 @@ package com.wongt8.hunting_game.Command;
 import com.wongt8.hunting_game.CountPoint.CountPoint;
 import com.wongt8.hunting_game.Hunting_Game;
 import com.wongt8.hunting_game.Tasks.TimerTasks;
+import org.bukkit.Achievement;
 import org.bukkit.Bukkit;
 import org.bukkit.Difficulty;
 import org.bukkit.GameMode;
@@ -11,6 +12,7 @@ import org.bukkit.command.CommandExecutor;
 import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;
 import org.bukkit.inventory.Inventory;
+import org.bukkit.potion.PotionEffect;
 
 import java.util.*;
 
@@ -38,6 +40,7 @@ public class StartCommand implements CommandExecutor {
         Bukkit.dispatchCommand(Bukkit.getConsoleSender(), "scoreboard teams remove pseudo");
         Bukkit.dispatchCommand(Bukkit.getConsoleSender(), "scoreboard teams add pseudo");
         Bukkit.dispatchCommand(Bukkit.getConsoleSender(), "scoreboard teams option pseudo nametagVisibility never");
+        Bukkit.dispatchCommand(Bukkit.getConsoleSender(), "scoreboard teams option pseudo seeFriendlyInvisibles false");
         Bukkit.dispatchCommand(Bukkit.getConsoleSender(), "scoreboard teams join pseudo @a");
 
         this.main.WORLD.setGameRuleValue("naturalRegeneration", "false");
@@ -54,10 +57,17 @@ public class StartCommand implements CommandExecutor {
 
             killerTarget.put(listeOfPlayer.get(i),listeOfPlayer.get((i+1)%listeOfPlayer.size()));
 
-            System.out.println(killerTarget);
-
             CountPoint.pointOfEveryone.add(new CountPoint(player.getUniqueId(),0));
 
+            // reset potion effects
+            for(PotionEffect effect : player.getActivePotionEffects()) {
+                player.removePotionEffect(effect.getType());
+            }
+
+            // reset achievements
+            for(Achievement a : Achievement.values()) {
+                if(player.hasAchievement(a)) player.removeAchievement(a);
+            }
             player.setGameMode(GameMode.SURVIVAL);
             player.setHealth(20);
             player.setFoodLevel(20);

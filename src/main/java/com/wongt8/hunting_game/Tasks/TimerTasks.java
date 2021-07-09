@@ -29,14 +29,15 @@ public class TimerTasks extends BukkitRunnable {
 		this.updateBoards();
 		
 		if(RUN) {
-			if(time%10 == 0){
+			if(time%300 == 0){
 				for(Map.Entry entry : StartCommand.killerTarget.entrySet()){
 					Player pToSendMessage = Bukkit.getPlayer((UUID) entry.getKey());
 					Player pToLocate = Bukkit.getPlayer((UUID) entry.getValue());
 					if(pToLocate != null && pToLocate.getGameMode().equals(GameMode.SURVIVAL) && pToSendMessage != null){
 						Location location = pToLocate.getLocation();
 						pToSendMessage.sendMessage("§eCoordonate of your target : §c§lx §r§6> " + location.getBlockX() + "§f, §c§ly §r§6> " + location.getBlockY() + "§f, §c§lz §r§6> " + location.getBlockZ());
-					}				}
+					}
+				}
 			}
 			time ++;
 
@@ -79,7 +80,7 @@ public class TimerTasks extends BukkitRunnable {
 				board.updateLine(4, formatLine("Your point", CountPoint.getPtsOf(board.getPlayer().getUniqueId())));
 			}
 			board.updateLine(6, formatLine("Players", this.main.getAlivePlayer()));
-			board.updateLine(8, formatLine("PvP", "ON", ChatColor.GREEN));
+			board.updateLine(8, formatLine("Kill", CountPoint.getNbKillOf(board.getPlayer().getUniqueId())));
         }
 	}
 }

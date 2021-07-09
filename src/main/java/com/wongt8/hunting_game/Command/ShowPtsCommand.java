@@ -7,6 +7,8 @@ import org.bukkit.command.CommandExecutor;
 import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;
 
+import java.util.Collections;
+
 public class ShowPtsCommand implements CommandExecutor {
 
     @Override
@@ -19,6 +21,7 @@ public class ShowPtsCommand implements CommandExecutor {
 
     public boolean pts(CommandSender sender, String[] args){
         if(args.length == 0){
+            Collections.sort(CountPoint.pointOfEveryone);
             sender.sendMessage("------ §lRank §r------ ");
             int index = CountPoint.pointOfEveryone.size()-1;
             int classement = 1;

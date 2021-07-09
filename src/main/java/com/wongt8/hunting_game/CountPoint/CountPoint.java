@@ -13,10 +13,14 @@ public class CountPoint implements Comparable<CountPoint>{
 
     private Integer pts;
     private UUID uuid;
+    private int nbKill;
+    private int nbKillerKill;
 
     public CountPoint(UUID id, Integer point){
         this.uuid = id;
         this.pts = point;
+        this.nbKill = 0;
+        this.nbKillerKill = 0;
     }
 
     public Integer getPts() {
@@ -35,8 +39,32 @@ public class CountPoint implements Comparable<CountPoint>{
         this.uuid = uuid;
     }
 
+    public int getNbKill() {
+        return nbKill;
+    }
+
+    public void setNbKill(int nbKill) {
+        this.nbKill = nbKill;
+    }
+
+    public int getNbKillerKill() {
+        return nbKillerKill;
+    }
+
+    public void setNbKillerKill(int nbKillerKill) {
+        this.nbKillerKill = nbKillerKill;
+    }
+
     public void addPts(Integer point){
         this.pts += point;
+    }
+
+    public void addKill(int nb){
+        this.nbKill += nb;
+    }
+
+    public void addKillKiller(int nb){
+        this.nbKillerKill += nb;
     }
 
     public static int getClassementOf(UUID uuid){
@@ -51,6 +79,24 @@ public class CountPoint implements Comparable<CountPoint>{
         for(CountPoint index : pointOfEveryone){
             if(uuid.equals(index.getUuid())){
                 return index.getPts();
+            }
+        }
+        return 0;
+    }
+
+    public static int getNbKillOf(UUID uuid){
+        for(CountPoint index : pointOfEveryone){
+            if(uuid.equals(index.getUuid())){
+                return index.getNbKill();
+            }
+        }
+        return 0;
+    }
+
+    public static int getNbKillTargetOf(UUID uuid){
+        for(CountPoint index : pointOfEveryone){
+            if(uuid.equals(index.getUuid())){
+                return index.getNbKill();
             }
         }
         return 0;
@@ -78,4 +124,6 @@ public class CountPoint implements Comparable<CountPoint>{
     public String toString() {
         return ("§7"+ Bukkit.getPlayer(this.uuid).getName() + " : §a§l" + this.pts);
     }
+
+
 }

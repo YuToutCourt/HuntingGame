@@ -2,6 +2,7 @@ package com.wongt8.hunting_game;
 
 import com.wongt8.hunting_game.Command.*;
 import com.wongt8.hunting_game.CustomMob.IronCustomCustom;
+import com.wongt8.hunting_game.Event.DeathEvent;
 import com.wongt8.hunting_game.Event.EntityEvent;
 import com.wongt8.hunting_game.Event.PlayerEvent;
 import com.wongt8.hunting_game.Event.WinEvent;
@@ -34,12 +35,14 @@ public final class Hunting_Game extends JavaPlugin {
         this.getCommand("start").setExecutor(new StartCommand(this));
         this.getCommand("pts").setExecutor(new ShowPtsCommand());
         this.getCommand("createSpawn").setExecutor(new CreateSpawnCommand(this));
+        this.getCommand("target").setExecutor(new ShowTargetCommand());
 
         PluginManager pm = this.getServer().getPluginManager();
         pm.registerEvents(new WinEvent(),this);
         pm.registerEvents(new EntityEvent(this),this);
         pm.registerEvents(new IronCustomCustom(),this);
         pm.registerEvents(new PlayerEvent(this),this);
+        pm.registerEvents(new DeathEvent(this),this);
 
         this.resetGame();
 
@@ -80,7 +83,7 @@ public final class Hunting_Game extends JavaPlugin {
         lines.add(TimerTasks.formatLine("Rank", "§k???"));
         lines.add(TimerTasks.formatLine("Your point","§k???"));
         lines.add(SEPARATOR);
-        lines.add(TimerTasks.formatLine("PvP", TimerTasks.formatTime(0, false)));
+        lines.add(TimerTasks.formatLine("Kill", 0));
         lines.add(SEPARATOR);
         board.updateLines(lines);
 
