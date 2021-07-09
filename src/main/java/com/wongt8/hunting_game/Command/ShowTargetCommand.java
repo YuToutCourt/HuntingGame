@@ -1,6 +1,5 @@
 package com.wongt8.hunting_game.Command;
 
-import com.wongt8.hunting_game.CustomMob.IronCustomCustom;
 import org.bukkit.Bukkit;
 import org.bukkit.GameMode;
 import org.bukkit.command.Command;

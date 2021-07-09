@@ -2,6 +2,7 @@ package com.wongt8.hunting_game.Tasks;
 
 import com.wongt8.hunting_game.Command.StartCommand;
 import com.wongt8.hunting_game.CountPoint.CountPoint;
+import com.wongt8.hunting_game.Event.SpawnChest;
 import com.wongt8.hunting_game.Hunting_Game;
 import org.bukkit.*;
 import org.bukkit.entity.Player;
@@ -41,6 +42,7 @@ public class TimerTasks extends BukkitRunnable {
 			}
 			if(time == 10){ this.main.WORLD.setDifficulty(Difficulty.HARD); }
 			time ++;
+			if(time%600 == 0){ SpawnChest.chest();}
 
 		}
 		

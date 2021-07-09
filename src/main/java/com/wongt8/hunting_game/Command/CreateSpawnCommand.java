@@ -28,8 +28,8 @@ public class CreateSpawnCommand implements CommandExecutor {
     }
 
     public boolean createSpawn(CommandSender sender){
-        Location spawn = this.main.WORLD.getSpawnLocation();
 
+        Location spawn = this.main.WORLD.getSpawnLocation();
         Player player = (Player) sender;
         GameMode gm = player.getGameMode();
         player.setGameMode(GameMode.CREATIVE);

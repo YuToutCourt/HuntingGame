@@ -6,7 +6,9 @@ import org.bukkit.GameMode;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
+import org.bukkit.event.player.AsyncPlayerChatEvent;
 import org.bukkit.event.player.PlayerJoinEvent;
+import org.bukkit.event.player.PlayerPortalEvent;
 import org.bukkit.event.player.PlayerQuitEvent;
 
 public class PlayerEvent implements Listener {
@@ -36,6 +38,22 @@ public class PlayerEvent implements Listener {
         Player player = event.getPlayer();
         event.setQuitMessage("§7[§4-§7] " + player.getDisplayName());
         this.main.removeBoardOf(player);
+    }
+
+    @EventHandler
+    public void onNetherPortal(PlayerPortalEvent event){
+        Player player = event.getPlayer();
+        if(event.getCause() != PlayerPortalEvent.TeleportCause.NETHER_PORTAL) return;
+
+        event.setCancelled(true);
+        player.sendMessage("§cNether is off");
+    }
+
+    @EventHandler
+    public void onMessage(AsyncPlayerChatEvent event){
+        Player playerSender = event.getPlayer();
+        String message = event.getMessage();
+        event.setFormat(playerSender.getDisplayName() + "§r§7" + " > §r" + message);
     }
 
 }

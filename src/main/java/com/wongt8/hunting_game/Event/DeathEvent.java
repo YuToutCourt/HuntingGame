@@ -46,7 +46,7 @@ public class DeathEvent implements Listener {
                     Player p = Bukkit.getPlayer((UUID) entry.getKey());
                     int classement = CountPoint.getClassementOf((UUID) entry.getKey());
                     CountPoint.pointOfEveryone.get((classement-CountPoint.pointOfEveryone.size())*-1).addPts(100);
-                    p.sendMessage("§c§l† §r§aYou target is dead alone ! §r§l+100 pts §c§l††");
+                    p.sendMessage("§c§l† §r§aYou target is dead alone ! §r§l+100 pts §c§l†");
                     this.main.playersInTheParty.remove(victim.getUniqueId());
                     if(this.main.playersInTheParty.size() > 1){
                         Player newTargetPlayer = Bukkit.getPlayer(nextTarget(p.getUniqueId()));

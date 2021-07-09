@@ -4,12 +4,14 @@ import com.wongt8.hunting_game.CountPoint.CountPoint;
 import com.wongt8.hunting_game.Hunting_Game;
 import com.wongt8.hunting_game.Tasks.TimerTasks;
 import org.bukkit.Bukkit;
+import org.bukkit.Material;
 import org.bukkit.entity.*;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
 import org.bukkit.event.entity.CreatureSpawnEvent;
 import org.bukkit.event.entity.EntityDamageByEntityEvent;
 import org.bukkit.event.entity.EntityDeathEvent;
+import org.bukkit.inventory.ItemStack;
 import org.bukkit.scheduler.BukkitRunnable;
 
 import java.util.Collections;
@@ -84,6 +86,46 @@ public class EntityEvent implements Listener {
             case CHICKEN:
                 event.setCancelled(true);
                 return;
+            case CREEPER:
+                event.setCancelled(true);
+                return;
+            case CAVE_SPIDER:
+                event.setCancelled(true);
+                return;
+            case SLIME:
+                event.setCancelled(true);
+                return;
+            case SPIDER:
+                event.setCancelled(true);
+                return;
+            case GUARDIAN:
+                event.setCancelled(true);
+                return;
+            case ENDERMITE:
+                event.setCancelled(true);
+                return;
+            case MUSHROOM_COW:
+                event.setCancelled(true);
+                return;
+            case SQUID:
+                event.setCancelled(true);
+                return;
+            case SHEEP:
+                event.setCancelled(true);
+                return;
+            case SILVERFISH:
+                event.setCancelled(true);
+                return;
+            // SPE SKE
+            case SKELETON:
+                BukkitRunnable task = new BukkitRunnable(){
+                    @Override
+                    public void run() {
+                        if(event.getEntity().getCustomName() == null){
+                            event.getEntity().setHealth(0);
+                        }
+                    }
+                };task.runTaskLater(this.main,1);
 
             default:
                 return;
@@ -101,10 +143,15 @@ public class EntityEvent implements Listener {
         Player p = event.getEntity().getKiller();
         EntityType mob = event.getEntityType();
         UUID uuidOfPlayer = p.getUniqueId();
+        if(mob.equals(EntityType.ZOMBIE)){
+            event.getDrops().clear();
+            event.getDrops().add(new ItemStack(Material.STRING, 2));
+        }
         int index = 0;
         for(Player player : Bukkit.getOnlinePlayers()) {
             if (uuidOfPlayer.equals(CountPoint.pointOfEveryone.get(index).getUuid())) {
                 CountPoint.pointOfEveryone.get(index).addPts(pointToAdd(mob));
+                p.sendMessage("§7+§a§l"+ pointToAdd(mob));
                 Collections.sort(CountPoint.pointOfEveryone);
                 break;
             }
