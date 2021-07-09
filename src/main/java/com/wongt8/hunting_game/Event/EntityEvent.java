@@ -59,25 +59,34 @@ public class EntityEvent implements Listener {
                 return;
 
             case WOLF:
-                Wolf wolf =(Wolf) event.getEntity();
+                Wolf wolf = (Wolf) event.getEntity();
                 wolf.setCustomName("§cWolf");
                 wolf.setMaxHealth(40.0);
                 wolf.setHealth(40.0);
+                wolf.setAngry(true);
+                return;
 
             case ZOMBIE:
                 Zombie zom = (Zombie) event.getEntity();
                 zom.setCustomName("§cZOMBIE");
                 zom.setMaxHealth(60.0);
                 zom.setHealth(60.0);
+                return;
+
             case ENDERMAN:
                 Enderman ender = (Enderman) event.getEntity();
                 ender.setCustomName("§cENDERMAN");
                 ender.setMaxHealth(80.0);
                 ender.setHealth(80.0);
+                return;
 
             // CANCEL SPAWN OF SOME MOBS
             case CHICKEN:
                 event.setCancelled(true);
+                return;
+
+            default:
+                return;
         }
 
 
@@ -148,6 +157,8 @@ public class EntityEvent implements Listener {
                 event.setDamage(6.0);
             case ENDERMAN:
                 event.setDamage(7.0);
+            default:
+                return;
 
         }
 

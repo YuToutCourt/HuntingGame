@@ -4,6 +4,7 @@ import com.wongt8.hunting_game.CountPoint.CountPoint;
 import com.wongt8.hunting_game.Hunting_Game;
 import com.wongt8.hunting_game.Tasks.TimerTasks;
 import org.bukkit.Bukkit;
+import org.bukkit.Difficulty;
 import org.bukkit.GameMode;
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandExecutor;
@@ -65,6 +66,7 @@ public class StartCommand implements CommandExecutor {
             inv.clear();
             i++;
         }
+        this.main.WORLD.setDifficulty(Difficulty.HARD);
         TimerTasks timer = new TimerTasks(this.main);
         timer.runTaskTimer(this.main, 0, 20);
         TimerTasks.setRunning(true);

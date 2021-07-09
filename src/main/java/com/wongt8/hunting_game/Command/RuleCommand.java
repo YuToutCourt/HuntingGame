@@ -4,7 +4,6 @@ import org.bukkit.command.Command;
 import org.bukkit.command.CommandExecutor;
 import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;
-import org.bukkit.util.Vector;
 
 public class RuleCommand implements CommandExecutor {
     @Override
@@ -16,8 +15,6 @@ public class RuleCommand implements CommandExecutor {
     }
 
     public boolean rule(CommandSender sender, String[] args) {
-        Player player = (Player) sender;
-        player.setVelocity(new Vector(0,1,1));
         int page;
         try {
             page = Integer.parseInt(args[0]);
@@ -33,4 +30,5 @@ public class RuleCommand implements CommandExecutor {
 
         }
     }
+
 }

@@ -61,7 +61,7 @@ public final class Hunting_Game extends JavaPlugin {
     public FastBoard createBoard(Player player) {
         String SEPARATOR = ChatColor.RED + " ";
         FastBoard board = new FastBoard(player);
-        board.updateTitle("§2§lHunting§r§aGame");
+        board.updateTitle("§2§l༄Hunting§r§aGame");
 
         List<String> lines = new ArrayList<String>();
         lines.add(SEPARATOR);
