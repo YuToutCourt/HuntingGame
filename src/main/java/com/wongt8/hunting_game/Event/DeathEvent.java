@@ -84,8 +84,8 @@ public class DeathEvent implements Listener {
 
             }
             if(next){
-                CountPoint.pointOfEveryone.get((classement-CountPoint.pointOfEveryone.size())*-1).addPts(-100);
-                attacker.sendMessage("§c§l† §r§4You just killed your someone ! You win §r§l-100 pts §c§l† ");
+                CountPoint.pointOfEveryone.get((classement-CountPoint.pointOfEveryone.size())*-1).addPts(-300);
+                attacker.sendMessage("§c§l† §r§4You just killed your someone ! You win §r§l-300 pts §c§l† ");
             }
 
 
