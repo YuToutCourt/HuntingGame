@@ -12,7 +12,6 @@ import org.bukkit.event.entity.CreatureSpawnEvent;
 import org.bukkit.event.entity.EntityDamageByEntityEvent;
 import org.bukkit.event.entity.EntityDeathEvent;
 import org.bukkit.inventory.ItemStack;
-import org.bukkit.scheduler.BukkitRunnable;
 
 import java.util.Collections;
 import java.util.UUID;
@@ -73,6 +72,7 @@ public class EntityEvent implements Listener {
                 zom.setCustomName("§cZOMBIE");
                 zom.setMaxHealth(60.0);
                 zom.setHealth(60.0);
+                zom.getEquipment().setHelmet(new ItemStack(Material.GOLD_HELMET));
                 return;
 
             case ENDERMAN:
@@ -113,19 +113,16 @@ public class EntityEvent implements Listener {
             case SHEEP:
                 event.setCancelled(true);
                 return;
-            case SILVERFISH:
+            case WITCH:
                 event.setCancelled(true);
                 return;
             // SPE SKE
             case SKELETON:
-                BukkitRunnable task = new BukkitRunnable(){
-                    @Override
-                    public void run() {
-                        if(event.getEntity().getCustomName() == null){
-                            event.getEntity().setHealth(0);
-                        }
-                    }
-                };task.runTaskLater(this.main,1);
+                event.setCancelled(true);
+                return;
+            case SILVERFISH:
+                event.setCancelled(true);
+                return;
 
             default:
                 return;
@@ -178,7 +175,7 @@ public class EntityEvent implements Listener {
                 return 50;
             case IRON_GOLEM:
                 return 200;
-            case SKELETON:
+            case WITHER:
                 return 10000;
             default:
                 return 0;

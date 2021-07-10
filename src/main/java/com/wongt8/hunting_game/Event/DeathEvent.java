@@ -81,7 +81,11 @@ public class DeathEvent implements Listener {
                     this.main.playersInTheParty.remove(victim.getUniqueId());
                     CountPoint.pointOfEveryone.get((classement-CountPoint.pointOfEveryone.size())*-1).addPts(100);
                     CountPoint.pointOfEveryone.get((classement-CountPoint.pointOfEveryone.size())*-1).addKillKiller(1);
-                    String message = CountPoint.pointOfEveryone.get((classement-CountPoint.pointOfEveryone.size())*-1).getNbKillerKill() <= 7 ? "§c§l† §r§aYou just killed your killer ! You win §r§l+100 pts + permanent bonus" : "§c§l† §aYou just killed your killer ! You win §r§l+100 pts §c§l†";
+                    String message =  "§c§l† §r§aYou just killed your killer ! You win §r§l+100 pts";
+                    if(CountPoint.pointOfEveryone.get((classement-CountPoint.pointOfEveryone.size())*-1).getNbKillerKill() <= 7){
+                        message += "+ permanent bonus";
+                    }
+                    message += "§c§l†";
                     attacker.sendMessage(message);
                     addBonusTo(attacker,classement);
                     victim.sendMessage("§c§l† §r§4You just died from your target §c§l† ");
@@ -123,7 +127,7 @@ public class DeathEvent implements Listener {
                 p.addPotionEffect(new PotionEffect(PotionEffectType.REGENERATION,255555,0));
                 return;
             case 6:
-                p.addPotionEffect(new PotionEffect(PotionEffectType.INCREASE_DAMAGE,255555,1));
+                p.addPotionEffect(new PotionEffect(PotionEffectType.INCREASE_DAMAGE,255555,0));
                 return;
             default:
                 return;

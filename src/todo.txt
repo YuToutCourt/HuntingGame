@@ -1,8 +1,7 @@
 Todo :
-    - Augmenter le spawn de certain mob (3)
-    - Faire le boss (4)
-    - Toute les 10 minutes coffres random
-    - Rendre les golems plus fort que le feu same pour le boss
+    - Augmenter le spawn de certain mob
+    + Faire le boss
+    + Rendre les golems plus fort que le feu
 
 
 - Trouver les mobs à tué :

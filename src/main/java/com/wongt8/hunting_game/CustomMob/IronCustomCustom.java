@@ -49,7 +49,6 @@ public class IronCustomCustom implements Listener {
         }
     }
 
-
     public static void spawnCustomSkeleton(Location location){
 
         IronGolem golem = Hunting_Game.WORLD.spawn(location,IronGolem.class);
@@ -57,6 +56,8 @@ public class IronCustomCustom implements Listener {
         golem.setMaxHealth(200.0);
         golem.setHealth(200.0);
         golem.addPotionEffect(new PotionEffect(PotionEffectType.SPEED,255555,2));
+        golem.addPotionEffect(new PotionEffect(PotionEffectType.FIRE_RESISTANCE,255555,2));
+
 
     }
 

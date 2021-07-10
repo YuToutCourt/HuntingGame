@@ -1,6 +1,7 @@
 package com.wongt8.hunting_game;
 
 import com.wongt8.hunting_game.Command.*;
+import com.wongt8.hunting_game.CustomMob.CustomBoss;
 import com.wongt8.hunting_game.CustomMob.IronCustomCustom;
 import com.wongt8.hunting_game.Event.DeathEvent;
 import com.wongt8.hunting_game.Event.EntityEvent;
@@ -39,11 +40,12 @@ public final class Hunting_Game extends JavaPlugin {
         this.getCommand("target").setExecutor(new ShowTargetCommand());
 
         PluginManager pm = this.getServer().getPluginManager();
-        pm.registerEvents(new WinEvent(),this);
         pm.registerEvents(new EntityEvent(this),this);
         pm.registerEvents(new IronCustomCustom(),this);
         pm.registerEvents(new PlayerEvent(this),this);
         pm.registerEvents(new DeathEvent(this),this);
+        pm.registerEvents(new CustomBoss(),this);
+        pm.registerEvents(new WinEvent(),this);
 
         this.resetGame();
 
