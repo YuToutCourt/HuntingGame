@@ -2,7 +2,7 @@ package com.wongt8.hunting_game;
 
 import com.wongt8.hunting_game.Command.*;
 import com.wongt8.hunting_game.CustomMob.CustomBoss;
-import com.wongt8.hunting_game.CustomMob.IronCustomCustom;
+import com.wongt8.hunting_game.CustomMob.IronGolemCustom;
 import com.wongt8.hunting_game.Event.DeathEvent;
 import com.wongt8.hunting_game.Event.EntityEvent;
 import com.wongt8.hunting_game.Event.PlayerEvent;
@@ -12,7 +12,6 @@ import fr.mrmicky.fastboard.FastBoard;
 import net.md_5.bungee.api.ChatColor;
 import org.bukkit.Bukkit;
 import org.bukkit.GameMode;
-import org.bukkit.Location;
 import org.bukkit.World;
 import org.bukkit.entity.Player;
 import org.bukkit.plugin.PluginManager;
@@ -41,7 +40,7 @@ public final class Hunting_Game extends JavaPlugin {
 
         PluginManager pm = this.getServer().getPluginManager();
         pm.registerEvents(new EntityEvent(this),this);
-        pm.registerEvents(new IronCustomCustom(),this);
+        pm.registerEvents(new IronGolemCustom(),this);
         pm.registerEvents(new PlayerEvent(this),this);
         pm.registerEvents(new DeathEvent(this),this);
         pm.registerEvents(new CustomBoss(),this);

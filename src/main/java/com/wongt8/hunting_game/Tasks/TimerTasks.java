@@ -2,6 +2,8 @@ package com.wongt8.hunting_game.Tasks;
 
 import com.wongt8.hunting_game.Command.StartCommand;
 import com.wongt8.hunting_game.CountPoint.CountPoint;
+import com.wongt8.hunting_game.CustomMob.CustomBoss;
+import com.wongt8.hunting_game.CustomMob.IronGolemCustom;
 import com.wongt8.hunting_game.Hunting_Game;
 import org.bukkit.*;
 import org.bukkit.entity.Player;
@@ -9,17 +11,15 @@ import org.bukkit.scheduler.BukkitRunnable;
 
 import fr.mrmicky.fastboard.FastBoard;
 
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Map;
-import java.util.UUID;
+import java.util.*;
 
 public class TimerTasks extends BukkitRunnable {
 
 	public static boolean RUN = false;
 	private static int time = 0;
+	private boolean boss = false;
 
-	public static int WBtime = 60*60;
+	private int WBtime = 60*60;
 	private int WBstate = 0;
 
 	private Hunting_Game main;
@@ -44,6 +44,16 @@ public class TimerTasks extends BukkitRunnable {
 			}
 			if(WBtime == 0 && WBstate == 1) { // worldborder ends moving
 				WBstate ++;
+			}
+			if (time >= 1200 && time%1200 == 0 && !boss)spawnGolem();
+
+			if(time >= 6000 && !boss){
+				this.main.WORLD.playSound(this.main.WORLD.getSpawnLocation(), Sound.WITHER_SPAWN, 1000.0F, 1.0F);
+				boss = true;
+				int y = this.main.WORLD.getHighestBlockYAt(0, 0);
+				Location location = new Location(this.main.WORLD,0,y,0);
+				CustomBoss.createBoss(location);
+				Bukkit.broadcastMessage("§cThe §lboss §r§cspawned");
 			}
 
 		}
@@ -102,6 +112,38 @@ public class TimerTasks extends BukkitRunnable {
 		}
 	}
 
+	private void spawnGolem(){
+		Random r = new Random();
+		int borderSize = (int) this.main.WORLD.getWorldBorder().getSize();
+		for(int i=0;i<7;i++){
+			int pos_ou_neg = r.nextInt(4);
+			int x = r.nextInt(borderSize)/2;
+			int z = r.nextInt(borderSize)/2;
+			switch (pos_ou_neg){
+				case 0:
+					x = x * -1;
+					z = z * -1;
+					break;
+				case 1:
+					x = x * 1;
+					z = z * 1;
+					break;
+				case 2:
+					x = x * -1;
+					z = z * 1;
+					break;
+				case 3:
+					x = x * 1;
+					z = z * -1;
+					break;
+			}
+			int y = this.main.WORLD.getHighestBlockYAt(x, z);
+			Location location = new Location(this.main.WORLD,x,y,z);
+			IronGolemCustom.spawnCustomGolem(location);
+		}
+
+	}
+
 	private void moveWorldBorder() {
 		this.main.WORLD.playSound(this.main.WORLD.getSpawnLocation(), Sound.ANVIL_LAND, 1000.0F, 1.0F);
 		List<UUID> listeOfPlayer= new ArrayList<UUID>();
@@ -111,11 +153,6 @@ public class TimerTasks extends BukkitRunnable {
 		WBtime = duration;
 		this.main.WORLD.getWorldBorder().setSize(endSize, duration);
 		Bukkit.broadcastMessage("§c§lBorder is now moving");
-	}
-
-
-	private void makeMobSpawn(int timeInSec){
-
 	}
 }
  

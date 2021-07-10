@@ -1,5 +1,5 @@
 Todo :
-    - Augmenter le spawn de certain mob
+    + Augmenter le spawn de certain mob
     + Faire le boss
     + Rendre les golems plus fort que le feu
 

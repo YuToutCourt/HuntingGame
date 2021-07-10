@@ -15,7 +15,7 @@ import org.bukkit.util.Vector;
 import java.util.Random;
 
 
-public class IronCustomCustom implements Listener {
+public class IronGolemCustom implements Listener {
 
 
 
@@ -49,7 +49,7 @@ public class IronCustomCustom implements Listener {
         }
     }
 
-    public static void spawnCustomSkeleton(Location location){
+    public static void spawnCustomGolem(Location location){
 
         IronGolem golem = Hunting_Game.WORLD.spawn(location,IronGolem.class);
         golem.setCustomName("§k???");

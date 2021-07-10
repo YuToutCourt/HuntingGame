@@ -46,7 +46,8 @@ public class EntityEvent implements Listener {
                 return;
 
             case COW:
-                Cow cow = (Cow) event.getEntity();;
+                Cow cow = (Cow) event.getEntity();
+                Hunting_Game.WORLD.spawn(cow.getLocation(),Wolf.class);
                 cow.setCustomName("§cCOW");
                 cow.setMaxHealth(25.0);
                 cow.setHealth(25.0);
@@ -54,6 +55,7 @@ public class EntityEvent implements Listener {
 
             case PIG:
                 Pig pig = (Pig) event.getEntity();
+                Hunting_Game.WORLD.spawn(pig.getLocation(),Ocelot.class);
                 pig.setCustomName("§cPIG");
                 pig.setMaxHealth(30.0);
                 pig.setHealth(30.0);
@@ -84,46 +86,20 @@ public class EntityEvent implements Listener {
 
             // CANCEL SPAWN OF SOME MOBS
             case CHICKEN:
-                event.setCancelled(true);
-                return;
             case CREEPER:
-                event.setCancelled(true);
-                return;
             case CAVE_SPIDER:
-                event.setCancelled(true);
-                return;
             case SLIME:
-                event.setCancelled(true);
-                return;
             case SPIDER:
-                event.setCancelled(true);
-                return;
             case GUARDIAN:
-                event.setCancelled(true);
-                return;
             case ENDERMITE:
-                event.setCancelled(true);
-                return;
             case MUSHROOM_COW:
-                event.setCancelled(true);
-                return;
             case SQUID:
-                event.setCancelled(true);
-                return;
             case SHEEP:
-                event.setCancelled(true);
-                return;
             case WITCH:
-                event.setCancelled(true);
-                return;
-            // SPE SKE
             case SKELETON:
-                event.setCancelled(true);
-                return;
             case SILVERFISH:
                 event.setCancelled(true);
                 return;
-
             default:
                 return;
         }
