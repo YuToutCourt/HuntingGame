@@ -23,7 +23,28 @@ public class RuleCommand implements CommandExecutor {
         }
         switch (page) {
             case 1:
-                sender.sendMessage("§9-----------Page 1/?------------");
+                sender.sendMessage("§9-----------Page 1/3------------");
+                sender.sendMessage("§3Earn §apoints §3by killing prey");
+                sender.sendMessage("§3The game end when a §rplayer §3collects §a10 000 !");
+                sender.sendMessage("§3The key to victory is for all comrades to work together!!");
+                return true;
+            case 2:
+                sender.sendMessage("§9-----------Page 2/3------------");
+                sender.sendMessage("§3Rabbit   ➸ §7+§a§l1");
+                sender.sendMessage("§3Ocelot   ➸ §7+§a§l2");
+                sender.sendMessage("§3Cow      ➸ §7+§a§l3");
+                sender.sendMessage("§3Pig      ➸ §7+§a§l5");
+                sender.sendMessage("§3Wolf     ➸ §7+§a§l15");
+                sender.sendMessage("§3Zombie   ➸ §7+§a§l30");
+                sender.sendMessage("§3Enderman ➸ §7+§a§l50");
+                sender.sendMessage("§3Human    ➸ §7-§c§l300");
+                sender.sendMessage("§k???§3    ➸ §7+§a§l200");
+                sender.sendMessage("§3Boss     ➸ §7+§a§l10 000");
+                return true;
+            case 3:
+                sender.sendMessage("§9-----------Page 3/3------------");
+                sender.sendMessage("§3Every §rplayer have a §ctarget that will earn a lot of §apoints");
+                sender.sendMessage("§3Some rules are hidden from the players. You maybe need to discover them");
                 return true;
             default:
                 return false;

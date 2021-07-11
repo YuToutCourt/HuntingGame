@@ -113,6 +113,7 @@ public class EntityEvent implements Listener {
     public void onKillMob(EntityDeathEvent event){
         if(!(TimerTasks.RUN)) return;
         if(!(event.getEntity().getKiller() instanceof Player)) return;
+        if(event.getEntity() instanceof Player) return;
         Player p = event.getEntity().getKiller();
         EntityType mob = event.getEntityType();
         UUID uuidOfPlayer = p.getUniqueId();

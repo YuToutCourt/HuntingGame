@@ -10,7 +10,7 @@ commands:
     permission: perm.use
   rule:
     description: Rules of the game
-    usage: /rule <1 -> ?>
+    usage: /rule <1 -> 3>
   start:
     description: Start the game
     usage: /start
