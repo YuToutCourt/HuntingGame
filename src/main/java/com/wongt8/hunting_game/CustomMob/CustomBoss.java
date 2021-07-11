@@ -2,6 +2,7 @@ package com.wongt8.hunting_game.CustomMob;
 
 import com.wongt8.hunting_game.Hunting_Game;
 import org.bukkit.Location;
+import org.bukkit.entity.Player;
 import org.bukkit.entity.Wither;
 import org.bukkit.entity.WitherSkull;
 import org.bukkit.entity.Zombie;
@@ -17,7 +18,7 @@ public class CustomBoss implements Listener {
     @EventHandler
     public void onHit(EntityDamageByEntityEvent event){
         Random rand = new Random();
-        if(event.getDamager() instanceof WitherSkull){
+        if(event.getDamager() instanceof WitherSkull && event.getEntity() instanceof Player){
             int random = rand.nextInt(9);
             if(random == 1 ){ Hunting_Game.WORLD.spawn(event.getDamager().getLocation(),Zombie.class); }
 

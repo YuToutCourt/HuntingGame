@@ -45,9 +45,7 @@ public class StartCommand implements CommandExecutor {
         this.main.WORLD.setGameRuleValue("naturalRegeneration", "false");
 
         Random rand = new Random();
-
         List<UUID> listeOfPlayer= new ArrayList<UUID>();
-
         for(Player player : Bukkit.getOnlinePlayers()){listeOfPlayer.add(player.getUniqueId());}
 
         this.main.WORLD.setDifficulty(Difficulty.PEACEFUL);
@@ -55,6 +53,14 @@ public class StartCommand implements CommandExecutor {
         this.main.WORLD.getWorldBorder().setCenter(this.main.WORLD.getSpawnLocation());
         this.main.WORLD.getWorldBorder().setSize(listeOfPlayer.size()*100);
         int borderSize = (listeOfPlayer.size()*100)/2;
+
+
+        //TO AVOID PP SPAWN AT THE TOP OF THE SPAWN
+        Location spawn = this.main.WORLD.getSpawnLocation();
+        String  removeCube = "fill " + (spawn.getBlockX() - 10) + " " + (spawn.getBlockY() - 1) + " " + (spawn.getBlockZ() - 10);
+        removeCube += " " + (spawn.getBlockX() + 10) + " " + (spawn.getBlockY() + 4) + " " + (spawn.getBlockZ() + 10);
+        removeCube += " minecraft:air";
+        Bukkit.dispatchCommand(Bukkit.getConsoleSender(), removeCube);
 
         Bukkit.dispatchCommand(Bukkit.getConsoleSender(), "spreadplayers 0 0 " + borderSize / 10 + " "+ (borderSize - 10) +" false @a"); //x z DistanceEntreChaquePlayer MaxRangeSurLaTp team?
 

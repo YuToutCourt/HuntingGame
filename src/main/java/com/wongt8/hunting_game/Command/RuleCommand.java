@@ -3,7 +3,6 @@ package com.wongt8.hunting_game.Command;
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandExecutor;
 import org.bukkit.command.CommandSender;
-import org.bukkit.entity.Player;
 
 public class RuleCommand implements CommandExecutor {
     @Override
@@ -25,7 +24,7 @@ public class RuleCommand implements CommandExecutor {
             case 1:
                 sender.sendMessage("§9-----------Page 1/3------------");
                 sender.sendMessage("§3Earn §apoints §3by killing prey");
-                sender.sendMessage("§3The game end when a §rplayer §3collects §a10 000 !");
+                sender.sendMessage("§3The §2game §3end when a §rplayer §3collects §a10 000 points !");
                 sender.sendMessage("§3The key to victory is for all comrades to work together!!");
                 return true;
             case 2:
@@ -43,8 +42,8 @@ public class RuleCommand implements CommandExecutor {
                 return true;
             case 3:
                 sender.sendMessage("§9-----------Page 3/3------------");
-                sender.sendMessage("§3Every §rplayer have a §ctarget that will earn a lot of §apoints");
-                sender.sendMessage("§3Some rules are hidden from the players. You maybe need to discover them");
+                sender.sendMessage("§3Every §rplayer §3have a §ctarget §3that will earn a lot of §apoints");
+                sender.sendMessage("§3Some §9rules §3are §e§lhidden §3from the §rplayers\n§3You maybe need to discover them");
                 return true;
             default:
                 return false;
