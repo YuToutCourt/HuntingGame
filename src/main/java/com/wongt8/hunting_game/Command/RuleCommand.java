@@ -1,13 +1,18 @@
 package com.wongt8.hunting_game.Command;
 
+import com.wongt8.hunting_game.Hunting_Game;
+import com.wongt8.hunting_game.Tasks.TimerTasks;
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandExecutor;
 import org.bukkit.command.CommandSender;
 
 public class RuleCommand implements CommandExecutor {
+
+
+
     @Override
     public boolean onCommand(CommandSender sender, Command command, String label, String[] args) {
-        if("rule".equalsIgnoreCase(command.getName()) && sender.isOp()){
+        if("rule".equalsIgnoreCase(command.getName())){
             return rule(sender,args);
         }
         return false;
@@ -24,7 +29,11 @@ public class RuleCommand implements CommandExecutor {
             case 1:
                 sender.sendMessage("§9-----------Page 1/3------------");
                 sender.sendMessage("§3Earn §apoints §3by killing prey");
-                sender.sendMessage("§3The §2game §3end when a §rplayer §3collects §a10 000 points !");
+                if(!TimerTasks.RUN) sender.sendMessage("§3The §2game §3end when a §rplayer §3collects §r??? §apoints !");
+                else{
+                    int nbPtsToCompleteTheGame = 500*Hunting_Game.setThePointForTheGame.size();
+                    sender.sendMessage("§3The §2game §3end when a §rplayer §3collects §a"+nbPtsToCompleteTheGame +" points !");
+                }
                 sender.sendMessage("§3The key to victory is for all comrades to work together!!");
                 return true;
             case 2:

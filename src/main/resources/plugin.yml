@@ -18,9 +18,10 @@ commands:
   pts:
     description: Show point of all the players
     usage: /pts or /pts {player}
-  createSpawn:
-    description: Create spawn
-    usage: /createSpawn
   target:
     description: Show target
     usage: /target
+  settime:
+    description: Set the time at x:x
+    usage: /settime <time>
+    permission: perm.use

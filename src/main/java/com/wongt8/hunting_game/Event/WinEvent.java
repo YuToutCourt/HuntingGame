@@ -20,7 +20,7 @@ public class WinEvent implements Listener {
     @EventHandler
     public void onKillMob(EntityDeathEvent event){
         for(int i = 0; i< CountPoint.pointOfEveryone.size(); i++){
-            if(CountPoint.pointOfEveryone.get(i).getPts() >= 10000){
+            if(CountPoint.pointOfEveryone.get(i).getPts() >= 500*Hunting_Game.setThePointForTheGame.size()){
                 Bukkit.broadcastMessage("§aEnd of the game §7§l"+Bukkit.getPlayer(CountPoint.pointOfEveryone.get(i).getUuid()).getName() + "§a win !");
                 int y = Hunting_Game.WORLD.getHighestBlockYAt(0,0)+5;
                 for(Player p : Bukkit.getOnlinePlayers()){

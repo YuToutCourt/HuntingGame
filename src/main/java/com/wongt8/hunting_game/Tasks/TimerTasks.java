@@ -16,10 +16,10 @@ import java.util.*;
 public class TimerTasks extends BukkitRunnable {
 
 	public static boolean RUN = false;
-	private static int time = 0;
+	public static int time = 0;
 	private boolean boss = false;
 
-	private int WBtime = 60*60;
+	public static int WBtime = 60*60;
 	private int WBstate = 0;
 
 	private Hunting_Game main;
@@ -35,7 +35,7 @@ public class TimerTasks extends BukkitRunnable {
 		
 		if(RUN) {
 			if(time%300 == 0)sendTargetLocation();
-			if(time == 10) this.main.WORLD.setDifficulty(Difficulty.HARD);
+			if(time == 10) this.main.WORLD.setDifficulty(Difficulty.NORMAL);
 			time ++;
 			if(WBstate < 2) WBtime --; // changing wb timer only if not finished
 			if(WBtime == 0 && WBstate == 0) { // worldborder starts moving
@@ -115,7 +115,7 @@ public class TimerTasks extends BukkitRunnable {
 	private void spawnGolem(){
 		Random r = new Random();
 		int borderSize = (int) this.main.WORLD.getWorldBorder().getSize();
-		for(int i=0;i<7;i++){
+		for(int i=0;i<this.main.getAlivePlayer();i++){
 			int pos_ou_neg = r.nextInt(4);
 			int x = r.nextInt(borderSize)/2;
 			int z = r.nextInt(borderSize)/2;

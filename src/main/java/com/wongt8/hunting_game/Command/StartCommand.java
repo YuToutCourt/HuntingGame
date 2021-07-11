@@ -42,7 +42,8 @@ public class StartCommand implements CommandExecutor {
         Bukkit.dispatchCommand(Bukkit.getConsoleSender(), "scoreboard teams option pseudo seeFriendlyInvisibles false");
         Bukkit.dispatchCommand(Bukkit.getConsoleSender(), "scoreboard teams join pseudo @a");
 
-        this.main.WORLD.setGameRuleValue("naturalRegeneration", "false");
+        this.main.WORLD.setGameRuleValue("naturalRegeneration", "true");
+        this.main.WORLD.setPVP(true);
 
         Random rand = new Random();
         List<UUID> listeOfPlayer= new ArrayList<UUID>();
@@ -93,6 +94,7 @@ public class StartCommand implements CommandExecutor {
             inv.clear();
             inv.addItem(new ItemStack(Material.COOKED_BEEF, 64));
             this.main.playersInTheParty.add(player.getUniqueId());
+            this.main.setThePointForTheGame.add(player.getUniqueId());
             i++;
         }
         TimerTasks timer = new TimerTasks(this.main);

@@ -10,10 +10,13 @@ import org.bukkit.event.player.AsyncPlayerChatEvent;
 import org.bukkit.event.player.PlayerJoinEvent;
 import org.bukkit.event.player.PlayerPortalEvent;
 import org.bukkit.event.player.PlayerQuitEvent;
+import org.bukkit.scheduler.BukkitRunnable;
 
 public class PlayerEvent implements Listener {
 
     Hunting_Game main;
+
+    private boolean spawnHasBeenCreate = false;
 
     public PlayerEvent(Hunting_Game game){
         this.main = game;
@@ -26,7 +29,19 @@ public class PlayerEvent implements Listener {
         this.main.boards.add(this.main.createBoard(player));
 
         if(!TimerTasks.RUN) {
+            player.setGameMode(GameMode.ADVENTURE);
             player.teleport(this.main.WORLD.getSpawnLocation());
+            if(!spawnHasBeenCreate){
+                BukkitRunnable task = new BukkitRunnable() {
+                    @Override
+                    public void run() {
+                        CreateSpawnEvent.createSpawn();
+                        spawnHasBeenCreate = true;
+                    }
+                };
+                task.runTaskLater(this.main, 20*1);
+            }
+
         } else {
             if(!this.main.playersInTheParty.contains(player.getUniqueId()))
                 player.setGameMode(GameMode.SPECTATOR);

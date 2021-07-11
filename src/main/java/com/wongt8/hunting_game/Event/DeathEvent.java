@@ -65,7 +65,7 @@ public class DeathEvent implements Listener {
                 if(attacker.equals(Bukkit.getPlayer((UUID) entry.getKey())) && victim.equals(Bukkit.getPlayer((UUID) entry.getValue()))){
                     CountPoint.pointOfEveryone.get((rank-CountPoint.pointOfEveryone.size())*-1).addPts(500);
                     attacker.sendMessage("§c§l† §r§aYou just killed your target ! §r§l+500 pts §c§l† ");
-                    victim.sendMessage("§c§l† §r§4You just died from your killer");
+                    victim.sendMessage("§c§l† §r§4You just died from your killer §c§l†");
                     this.main.playersInTheParty.remove(victim.getUniqueId());
                     if(this.main.playersInTheParty.size() > 1){
                         Player newTargetPlayer = Bukkit.getPlayer(nextTarget(attacker.getUniqueId()));
@@ -88,7 +88,7 @@ public class DeathEvent implements Listener {
                     victim.sendMessage("§c§l† §r§4You just died from your target §c§l† ");
                     next = false;
                 }
-                if(victim.equals(Bukkit.getPlayer((UUID) entry.getValue())) && Bukkit.getPlayer((UUID) entry.getKey()).getGameMode().equals(GameMode.SURVIVAL)){
+                if(victim.equals(Bukkit.getPlayer((UUID) entry.getValue())) && Bukkit.getPlayer((UUID) entry.getKey()).getGameMode().equals(GameMode.SURVIVAL) && !attacker.equals(Bukkit.getPlayer((UUID) entry.getKey()))){
                     Player p = Bukkit.getPlayer((UUID)entry.getKey());
                     int rank2 = CountPoint.getClassementOf((p.getUniqueId()));
                     CountPoint.pointOfEveryone.get((rank2-CountPoint.pointOfEveryone.size())*-1).addPts(100);
