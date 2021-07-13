@@ -45,7 +45,7 @@ public class DeathEvent implements Listener {
             for(Map.Entry entry : StartCommand.killerTarget.entrySet()){
                 if(victim.equals(Bukkit.getPlayer((UUID) entry.getValue())) && Bukkit.getPlayer((UUID) entry.getKey()).getGameMode().equals(GameMode.SURVIVAL)){
                     Player playerOfTheVictim = Bukkit.getPlayer((UUID) entry.getKey());
-                    int rank = CountPoint.getClassementOf((UUID) entry.getKey());
+                    int rank = CountPoint.getRankOf((UUID) entry.getKey());
                     CountPoint.pointOfEveryone.get((rank-CountPoint.pointOfEveryone.size())*-1).addPts(100);
                     playerOfTheVictim.sendMessage("§c§l† §r§aYou target is dead alone ! §r§l+100 pts §c§l†");
                     this.main.playersInTheParty.remove(victim.getUniqueId());
@@ -58,7 +58,7 @@ public class DeathEvent implements Listener {
         }else{
             boolean next = true;
             event.setDeathMessage("§c§l† §r" + victim.getDisplayName()+ " §c§lwas killed by §r" + attacker.getPlayerListName() + " §c§l†");
-            int rank = CountPoint.getClassementOf(attacker.getUniqueId());
+            int rank = CountPoint.getRankOf(attacker.getUniqueId());
             CountPoint.pointOfEveryone.get((rank-CountPoint.pointOfEveryone.size())*-1).addKill(1);
             for(Map.Entry entry : StartCommand.killerTarget.entrySet()){
                 // KILLER KILL TARGET
@@ -90,7 +90,7 @@ public class DeathEvent implements Listener {
                 }
                 if(victim.equals(Bukkit.getPlayer((UUID) entry.getValue())) && Bukkit.getPlayer((UUID) entry.getKey()).getGameMode().equals(GameMode.SURVIVAL) && !attacker.equals(Bukkit.getPlayer((UUID) entry.getKey()))){
                     Player p = Bukkit.getPlayer((UUID)entry.getKey());
-                    int rank2 = CountPoint.getClassementOf((p.getUniqueId()));
+                    int rank2 = CountPoint.getRankOf((p.getUniqueId()));
                     CountPoint.pointOfEveryone.get((rank2-CountPoint.pointOfEveryone.size())*-1).addPts(100);
                     p.sendMessage("§c§l† §r§aYou target is dead alone ! §r§l+100 pts §c§l†");
                     this.main.playersInTheParty.remove(victim.getUniqueId());

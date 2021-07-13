@@ -9,10 +9,10 @@ import java.util.UUID;
 
 public class CountPoint implements Comparable<CountPoint>{
 
-    public static List<CountPoint> pointOfEveryone = new ArrayList<CountPoint>();
+    public static List<CountPoint> pointOfEveryone = new ArrayList<>();
 
     private Integer pts;
-    private UUID uuid;
+    private final UUID uuid;
     private int nbKill;
     private int nbKillerKill;
 
@@ -27,32 +27,16 @@ public class CountPoint implements Comparable<CountPoint>{
         return pts;
     }
 
-    public void setPts(Integer pts) {
-        this.pts = pts;
-    }
-
     public UUID getUuid() {
         return uuid;
-    }
-
-    public void setUuid(UUID uuid) {
-        this.uuid = uuid;
     }
 
     public int getNbKill() {
         return nbKill;
     }
 
-    public void setNbKill(int nbKill) {
-        this.nbKill = nbKill;
-    }
-
     public int getNbKillerKill() {
         return nbKillerKill;
-    }
-
-    public void setNbKillerKill(int nbKillerKill) {
-        this.nbKillerKill = nbKillerKill;
     }
 
     public void addPts(Integer point){
@@ -67,12 +51,12 @@ public class CountPoint implements Comparable<CountPoint>{
         this.nbKillerKill += nb;
     }
 
-    public static int getClassementOf(UUID uuid){
-        int classement = 0;
-        while (!(pointOfEveryone.get(classement).getUuid().equals(uuid))){
-            classement++;
+    public static int getRankOf(UUID uuid){
+        int rank = 0;
+        while (!(pointOfEveryone.get(rank).getUuid().equals(uuid))){
+            rank++;
         }
-        return pointOfEveryone.size()-classement;
+        return pointOfEveryone.size()-rank;
     }
 
     public static int getPtsOf(UUID uuid){
@@ -85,15 +69,6 @@ public class CountPoint implements Comparable<CountPoint>{
     }
 
     public static int getNbKillOf(UUID uuid){
-        for(CountPoint index : pointOfEveryone){
-            if(uuid.equals(index.getUuid())){
-                return index.getNbKill();
-            }
-        }
-        return 0;
-    }
-
-    public static int getNbKillTargetOf(UUID uuid){
         for(CountPoint index : pointOfEveryone){
             if(uuid.equals(index.getUuid())){
                 return index.getNbKill();

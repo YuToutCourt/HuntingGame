@@ -91,7 +91,7 @@ public class TimerTasks extends BukkitRunnable {
 				board.updateLine(4, formatLine("Your point","§k???"));
 			}
 			else{
-				board.updateLine(3, formatLine("Rank", CountPoint.getClassementOf(board.getPlayer().getUniqueId())));
+				board.updateLine(3, formatLine("Rank", CountPoint.getRankOf(board.getPlayer().getUniqueId())));
 				board.updateLine(4, formatLine("Your point", CountPoint.getPtsOf(board.getPlayer().getUniqueId())));
 			}
 			board.updateLine(6, formatLine("Players", this.main.getAlivePlayer()));
