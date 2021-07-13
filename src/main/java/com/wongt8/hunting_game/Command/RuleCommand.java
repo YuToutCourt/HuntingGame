@@ -47,7 +47,8 @@ public class RuleCommand implements CommandExecutor {
                 sender.sendMessage("§3Enderman ➸ §7+§a§l50");
                 sender.sendMessage("§3Human    ➸ §7-§c§l300");
                 sender.sendMessage("§k???§3    ➸ §7+§a§l200");
-                sender.sendMessage("§3Boss     ➸ §7+§a§l10 000");
+                if(!TimerTasks.RUN)  sender.sendMessage("§3Boss ➸ §7+§a§l???");
+                else{ sender.sendMessage("§3Boss ➸ §7+§a§l"+500*Hunting_Game.setThePointForTheGame.size());}
                 return true;
             case 3:
                 sender.sendMessage("§9-----------Page 3/3------------");

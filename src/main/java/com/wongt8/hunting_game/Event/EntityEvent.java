@@ -153,7 +153,7 @@ public class EntityEvent implements Listener {
             case IRON_GOLEM:
                 return 200;
             case WITHER:
-                return 10000;
+                return 500*Hunting_Game.setThePointForTheGame.size();
             default:
                 return 0;
         }
