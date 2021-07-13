@@ -1,20 +1,5 @@
 Todo :
-    + Augmenter le spawn de certain mob
-    + Faire le boss
-    + Rendre les golems plus fort que le feu
 
-
-- Trouver les mobs à tué :
-    - Lapin -> Lapin -> 1 pts
-    - Renard -> Ocelot avec plus de pv et dmg
-    - Cerf -> Cow avec plus de pv et dmg
-    - Sanglier -> Pig avec plus de pv et dmg
-    - Loup -> Loup avec plus de pv et dmg
-    - Ours -> Zombie avec plus de pv et dmg
-    - Gros ours -> Enderman avec plus de pv et dmg
-    - Humain -> Humain
-    - ??? -> Golem Custom with sword (or not) and a bit of custom attack and don't take arrow and throw them back to the sender
-    - Boss -> Skelete Custom with custom attack...
 
 
 ---------------------
