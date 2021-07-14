@@ -30,7 +30,6 @@ public class DeathEvent implements Listener {
 
     @EventHandler
     public void onDeath(PlayerDeathEvent event){
-        Collections.sort(CountPoint.pointOfEveryone);
         Player victim = event.getEntity();
         Player attacker = victim.getKiller();
         Location deathLocation = victim.getLocation();
@@ -108,6 +107,7 @@ public class DeathEvent implements Listener {
 
 
         }
+        Collections.sort(CountPoint.pointOfEveryone);
 
     }
 
