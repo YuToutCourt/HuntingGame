@@ -72,8 +72,8 @@ public class EntityEvent implements Listener {
             case ZOMBIE:
                 Zombie zom = (Zombie) event.getEntity();
                 zom.setCustomName("§cZOMBIE");
-                zom.setMaxHealth(60.0);
-                zom.setHealth(60.0);
+                zom.setMaxHealth(50.0);
+                zom.setHealth(50.0);
                 zom.getEquipment().setHelmet(new ItemStack(Material.GOLD_HELMET));
                 return;
 
