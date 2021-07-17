@@ -116,32 +116,18 @@ public class TimerTasks extends BukkitRunnable {
 		Random r = new Random();
 		int borderSize = (int) this.main.WORLD.getWorldBorder().getSize();
 		for(int i=0;i<this.main.getAlivePlayer();i++){
-			int pos_ou_neg = r.nextInt(4);
-			int x = r.nextInt(borderSize)/2;
-			int z = r.nextInt(borderSize)/2;
-			switch (pos_ou_neg){
-				case 0:
-					x = x * -1;
-					z = z * -1;
-					break;
-				case 1:
-					x = x * 1;
-					z = z * 1;
-					break;
-				case 2:
-					x = x * -1;
-					z = z * 1;
-					break;
-				case 3:
-					x = x * 1;
-					z = z * -1;
-					break;
-			}
+			int x = negativeOrNot(r.nextInt(borderSize)/2);
+			int z = negativeOrNot(r.nextInt(borderSize)/2);
 			int y = this.main.WORLD.getHighestBlockYAt(x, z);
 			Location location = new Location(this.main.WORLD,x,y,z);
 			IronGolemCustom.spawnCustomGolem(location);
 		}
 
+	}
+	private int negativeOrNot(int number){
+		Random rand = new Random();
+		int random = rand.nextInt(2);
+		return random == 0 ? number*-1 : number;
 	}
 
 	private void moveWorldBorder() {

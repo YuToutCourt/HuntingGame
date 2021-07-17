@@ -19,9 +19,10 @@ public class TimeCommand implements CommandExecutor {
     public boolean time(CommandSender sender, String[] args){
         if(args.length == 0) return false;
         try{
-            int time = Integer.parseInt(args[0]);
-            TimerTasks.time = time*60;
-            TimerTasks.WBtime -= time*60;
+            int time = Integer.parseInt(args[0])*60;
+            TimerTasks.time = time;
+            if(time > 60) TimerTasks.WBtime = 0;
+            else TimerTasks.WBtime -= time;
             sender.sendMessage("§eThe time have been set to §c"+ args[0]);
             return true;
         }
