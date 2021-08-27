@@ -1,11 +1,10 @@
 package com.wongt8.hunting_game.Command;
 
-import com.wongt8.hunting_game.CustomMob.CustomBoss;
 import org.bukkit.Bukkit;
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandExecutor;
 import org.bukkit.command.CommandSender;
-import org.bukkit.entity.Player;
+
 
 public class AlertCommand implements CommandExecutor {
 

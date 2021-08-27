@@ -17,7 +17,7 @@ commands:
     permission: perm.use
   pts:
     description: Show point of all the players
-    usage: /pts or /pts {player}
+    usage: /pts or /pts <player>
   target:
     description: Show target
     usage: /target
