@@ -36,12 +36,6 @@ public class StartCommand implements CommandExecutor {
 
     public boolean start(){
 
-        Bukkit.dispatchCommand(Bukkit.getConsoleSender(), "scoreboard teams remove pseudo");
-        Bukkit.dispatchCommand(Bukkit.getConsoleSender(), "scoreboard teams add pseudo");
-        Bukkit.dispatchCommand(Bukkit.getConsoleSender(), "scoreboard teams option pseudo nametagVisibility never");
-        Bukkit.dispatchCommand(Bukkit.getConsoleSender(), "scoreboard teams option pseudo seeFriendlyInvisibles false");
-        Bukkit.dispatchCommand(Bukkit.getConsoleSender(), "scoreboard teams join pseudo @a");
-
         this.main.WORLD.setGameRuleValue("naturalRegeneration", "true");
         this.main.WORLD.setPVP(true);
 
