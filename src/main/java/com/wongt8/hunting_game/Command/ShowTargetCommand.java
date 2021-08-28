@@ -23,7 +23,7 @@ public class ShowTargetCommand implements CommandExecutor {
 
     public boolean target(CommandSender sender){
         sender.sendMessage("---- §4Killer -> §2Target §r---- \n");
-        for(Map.Entry entry : StartCommand.killerTarget.entrySet()){
+        for(Map.Entry<UUID,UUID> entry : StartCommand.killerTarget.entrySet()){
             Player pToSendMessage = Bukkit.getPlayer((UUID) entry.getKey());
             Player pToLocate = Bukkit.getPlayer((UUID) entry.getValue());
             sender.sendMessage("§c" + pToSendMessage.getName() + " -> §a" + pToLocate.getName());

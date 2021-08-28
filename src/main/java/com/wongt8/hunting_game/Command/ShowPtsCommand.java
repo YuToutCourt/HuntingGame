@@ -24,12 +24,10 @@ public class ShowPtsCommand implements CommandExecutor {
             Collections.sort(CountPoint.pointOfEveryone);
             sender.sendMessage("------ §lRank §r------ ");
             int index = CountPoint.pointOfEveryone.size()-1;
-            int rank = 1;
-            for(Player p : Bukkit.getOnlinePlayers()){
+            for(int rank = 1; rank <= Bukkit.getOnlinePlayers().size(); rank++){
                 try{
                     sender.sendMessage("§l["+ rank +"] "+CountPoint.pointOfEveryone.get(index).toString());
                 } catch (Exception e){return true;}
-                rank++;
                 index--;
             }
             return true;

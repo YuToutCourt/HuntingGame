@@ -121,15 +121,13 @@ public class EntityEvent implements Listener {
             event.getDrops().clear();
             event.getDrops().add(new ItemStack(Material.STRING, 2));
         }
-        int index = 0;
-        for(Player player : Bukkit.getOnlinePlayers()) {
+        for(int index = 0; index <= Bukkit.getOnlinePlayers().size(); index++){
             if (uuidOfPlayer.equals(CountPoint.pointOfEveryone.get(index).getUuid())) {
                 CountPoint.pointOfEveryone.get(index).addPts(pointToAdd(mob));
                 p.sendMessage("§7+§a§l"+ pointToAdd(mob));
                 Collections.sort(CountPoint.pointOfEveryone);
                 break;
             }
-            index++;
         }
 
     }
