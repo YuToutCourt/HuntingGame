@@ -1,6 +1,7 @@
 package com.wongt8.hunting_game.Command;
 
 import com.wongt8.hunting_game.CountPoint.CountPoint;
+import com.wongt8.hunting_game.Tasks.TimerTasks;
 import org.bukkit.Bukkit;
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandExecutor;
@@ -37,13 +38,15 @@ public class ShowPtsCommand implements CommandExecutor {
             sender.sendMessage("§cThe player §r§l"+ args[0] + "§r §c§lis not connected");
             return true;
         }
-        int index = 0;
-        for(Player p : Bukkit.getOnlinePlayers()){
-            if(target.getUniqueId().equals(CountPoint.pointOfEveryone.get(index).getUuid())) {
-                sender.sendMessage(CountPoint.pointOfEveryone.get(index).toString());
-                return true;
+        if(!TimerTasks.RUN){
+            sender.sendMessage("§7"+ args[0]+" : §a§l0");
+        }else {
+            for(int index = 0; index <= Bukkit.getOnlinePlayers().size(); index++) {
+                if(target.getUniqueId().equals(CountPoint.pointOfEveryone.get(index).getUuid())) {
+                    sender.sendMessage(CountPoint.pointOfEveryone.get(index).toString());
+                    return true;
+                }
             }
-            index++;
         }
         return false;
     }
