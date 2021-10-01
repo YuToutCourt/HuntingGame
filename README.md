@@ -4,7 +4,7 @@
 # HuntingGame
 <img src="https://img.shields.io/badge/Java-Maven-brightgreen.svg?style=plastic">
 
-HuntingGame is a plugin for Minecraft 1.8.* servers. It allows for players to provide an additional game mode (game mode inspired by the manga Darwin's Game)
+HuntingGame is a plugin for Minecraft 1.8.* servers. It allows players to provide an additional game mode (game mode inspired by the manga Darwin's Game)
 
 
 
