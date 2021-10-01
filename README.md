@@ -36,7 +36,7 @@ The key to victory is for all comrades to work together !!
     # Set the time at x:x
     /settime <time>
 
-## In-game command 
+## In-game commands
 
     # Show the rule of the game at <page>
     /rule <1 -> 3>
