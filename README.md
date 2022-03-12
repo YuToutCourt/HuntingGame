@@ -9,7 +9,7 @@ HuntingGame is a plugin for Minecraft 1.8.* servers. It allows players to provid
 
 
 ## Introduction
-Defeat prey and earn **Points** ! The game end when a player collects **???** points !
+Defeat prey and earn **Points** ! The game end when a player collects **???** (the number of points to win the game if determine by the number of player at the start of the game) points !
 The key to victory is for all comrades to work together !!
 
 ### Points
