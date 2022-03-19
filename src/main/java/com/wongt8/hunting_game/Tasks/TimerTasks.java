@@ -45,7 +45,7 @@ public class TimerTasks extends BukkitRunnable {
 			if(WBtime == 0 && WBstate == 1) { // worldborder ends moving
 				WBstate ++;
 			}
-			if (time >= 1200 && time%1200 == 0 && !boss)spawnGolem();
+			if (time >= 1200 && time%1200 == 0 && !boss) spawnGolem();
 
 			if(time >= 6000 && !boss){
 				this.main.WORLD.playSound(this.main.WORLD.getSpawnLocation(), Sound.WITHER_SPAWN, 1000.0F, 1.0F);

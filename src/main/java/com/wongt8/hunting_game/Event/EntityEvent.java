@@ -12,6 +12,8 @@ import org.bukkit.event.entity.CreatureSpawnEvent;
 import org.bukkit.event.entity.EntityDamageByEntityEvent;
 import org.bukkit.event.entity.EntityDeathEvent;
 import org.bukkit.inventory.ItemStack;
+import org.bukkit.potion.PotionEffect;
+import org.bukkit.potion.PotionEffectType;
 
 import java.util.Collections;
 import java.util.UUID;
@@ -33,6 +35,17 @@ public class EntityEvent implements Listener {
         // CUSTOM MOB
 
         switch (mobs){
+
+            case BAT:
+                Bat bat = (Bat) event.getEntity();
+                bat.setCustomName("§c§lBat");
+                return;
+
+            case CHICKEN:
+                Chicken chicken = (Chicken) event.getEntity();
+                chicken.setCustomName("§cCHICKEN");
+                return;
+
             case RABBIT:
                 Rabbit ra = (Rabbit) event.getEntity();
                 ra.setCustomName("§cRabbit");
@@ -69,6 +82,13 @@ public class EntityEvent implements Listener {
                 wolf.setAngry(true);
                 return;
 
+            case SKELETON:
+                Skeleton skele = (Skeleton) event.getEntity();
+                skele.setCustomName("§cSkeleton");
+                skele.setMaxHealth(40.0);
+                skele.setHealth(40.0);
+                return;
+
             case ZOMBIE:
                 Zombie zom = (Zombie) event.getEntity();
                 zom.setCustomName("§cZOMBIE");
@@ -84,8 +104,17 @@ public class EntityEvent implements Listener {
                 ender.setHealth(80.0);
                 return;
 
+            case IRON_GOLEM:
+                IronGolem golem = (IronGolem) event.getEntity();
+                golem.setCustomName("§k???");
+                golem.setMaxHealth(200.0);
+                golem.setHealth(200.0);
+                golem.addPotionEffect(new PotionEffect(PotionEffectType.SPEED,255555,2));
+                golem.addPotionEffect(new PotionEffect(PotionEffectType.FIRE_RESISTANCE,255555,2));
+                return;
+
             // CANCEL SPAWN OF SOME MOBS
-            case CHICKEN:
+
             case CREEPER:
             case CAVE_SPIDER:
             case SLIME:
@@ -96,7 +125,6 @@ public class EntityEvent implements Listener {
             case SQUID:
             case SHEEP:
             case WITCH:
-            case SKELETON:
             case SILVERFISH:
                 event.setCancelled(true);
                 return;
@@ -121,10 +149,11 @@ public class EntityEvent implements Listener {
             event.getDrops().clear();
             event.getDrops().add(new ItemStack(Material.STRING, 2));
         }
-        for(int index = 0; index <= Bukkit.getOnlinePlayers().size(); index++){
-            if (uuidOfPlayer.equals(CountPoint.pointOfEveryone.get(index).getUuid())) {
+        for(int index = 0; index <CountPoint.pointOfEveryone.size(); index++){
+            if (uuidOfPlayer.equals(CountPoint.pointOfEveryone.get(index).getUuid()) && Hunting_Game.playersInTheParty.contains(uuidOfPlayer)){
                 CountPoint.pointOfEveryone.get(index).addPts(pointToAdd(mob));
                 p.sendMessage("§7+§a§l"+ pointToAdd(mob));
+                System.out.println("[Hunting Game] Point added successfully !!");
                 Collections.sort(CountPoint.pointOfEveryone);
                 break;
             }
@@ -135,6 +164,8 @@ public class EntityEvent implements Listener {
     public int pointToAdd(EntityType mob){
         switch(mob){
             case RABBIT:
+            case CHICKEN:
+            case BAT:
                 return 1;
             case OCELOT:
                 return 2;
@@ -146,6 +177,8 @@ public class EntityEvent implements Listener {
                 return 15;
             case ZOMBIE:
                 return 30;
+            case SKELETON:
+                return 40;
             case ENDERMAN:
                 return 50;
             case IRON_GOLEM:
@@ -165,15 +198,15 @@ public class EntityEvent implements Listener {
 
         switch (mob){
             case OCELOT:
-                event.setDamage(2.0);
+                event.setDamage(1.0);
             case COW:
-                event.setDamage(3.0);
+                event.setDamage(2.0);
             case PIG:
-                event.setDamage(4.0);
+                event.setDamage(3.0);
             case WOLF:
-                event.setDamage(5.0);
+                event.setDamage(4.0);
             case ZOMBIE:
-                event.setDamage(6.0);
+                event.setDamage(7.0);
             case ENDERMAN:
                 event.setDamage(7.0);
             default:

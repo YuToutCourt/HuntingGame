@@ -1,6 +1,15 @@
 Todo :
 
-    nothing todo :)
+    + Nether ??
+    + Cute clean
+    + add config file to make the game customizable
+
+
+    - If a player deco during the game and never come back, target command will not work
+
+
+
+
 
 
 ---------------------

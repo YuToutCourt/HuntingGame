@@ -13,6 +13,8 @@ import org.bukkit.event.player.AsyncPlayerChatEvent;
 import org.bukkit.event.player.PlayerJoinEvent;
 import org.bukkit.event.player.PlayerPortalEvent;
 import org.bukkit.event.player.PlayerQuitEvent;
+import org.bukkit.potion.PotionEffect;
+import org.bukkit.potion.PotionEffectType;
 import org.bukkit.scheduler.BukkitRunnable;
 
 public class PlayerEvent implements Listener {
@@ -32,14 +34,15 @@ public class PlayerEvent implements Listener {
         if(!TimerTasks.RUN) {
             player.setGameMode(GameMode.ADVENTURE);
             Material blockAtSpawn = this.main.WORLD.getBlockAt(0,249,0).getType();
-            if(!(blockAtSpawn.equals(Material.GLASS))){
+            player.addPotionEffect(new PotionEffect(PotionEffectType.SATURATION, Integer.MAX_VALUE, 1, true, false));
+            if(!(blockAtSpawn.equals(Material.GLASS))) {
                 BukkitRunnable task = new BukkitRunnable() {
                     @Override
                     public void run() {
-                        createSpawn();
+                        createSpawn(player);
                     }
                 };
-                task.runTaskLater(this.main, 20*1);
+                task.runTaskLater(this.main, 20 * 1);
             }
             player.teleport(this.main.WORLD.getSpawnLocation());
 
@@ -73,7 +76,7 @@ public class PlayerEvent implements Listener {
     }
 
 
-    private void createSpawn() {
+    private void createSpawn(Player player) {
 
         Location spawn = Hunting_Game.WORLD.getSpawnLocation();
 
@@ -87,6 +90,8 @@ public class PlayerEvent implements Listener {
 
         Bukkit.dispatchCommand(Bukkit.getConsoleSender(), createCube);
         Bukkit.dispatchCommand(Bukkit.getConsoleSender(), carveCube);
+
+        player.teleport(spawn);
     }
 
 }

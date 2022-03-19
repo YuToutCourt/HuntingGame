@@ -51,7 +51,9 @@ public class IronGolemCustom implements Listener {
 
     public static void spawnCustomGolem(Location location){
 
+
         IronGolem golem = Hunting_Game.WORLD.spawn(location,IronGolem.class);
+        System.out.println("Spawning Iron Golem at " + location.toString());
         golem.setCustomName("§k???");
         golem.setMaxHealth(200.0);
         golem.setHealth(200.0);

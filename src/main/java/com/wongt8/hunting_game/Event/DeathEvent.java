@@ -3,10 +3,7 @@ package com.wongt8.hunting_game.Event;
 import com.wongt8.hunting_game.Command.StartCommand;
 import com.wongt8.hunting_game.CountPoint.CountPoint;
 import com.wongt8.hunting_game.Hunting_Game;
-import org.bukkit.Bukkit;
-import org.bukkit.GameMode;
-import org.bukkit.Location;
-import org.bukkit.Material;
+import org.bukkit.*;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
@@ -36,17 +33,25 @@ public class DeathEvent implements Listener {
         victim.spigot().respawn();
         victim.setGameMode(GameMode.SPECTATOR);
         victim.teleport(deathLocation);
+        this.main.WORLD.playSound(deathLocation, Sound.ZOMBIE_REMEDY, 1000.0F, 1.0F);
 
 
         if(!(attacker instanceof Player)){
             event.setDeathMessage("§c§l† §r" + victim.getDisplayName() + " §c§ldied from PVE §c§l†");
             // CHECK IF FOR ALL THE PLAYER THAT HAVE THE VICTIM IN TARGET
             for(Map.Entry entry : StartCommand.killerTarget.entrySet()){
-                if(victim.equals(Bukkit.getPlayer((UUID) entry.getValue())) && Bukkit.getPlayer((UUID) entry.getKey()).getGameMode().equals(GameMode.SURVIVAL)){
-                    Player playerOfTheVictim = Bukkit.getPlayer((UUID) entry.getKey());
+
+                // Find the victim to add point to everyone that is linked to him
+                if(victim.equals(Bukkit.getPlayer((UUID) entry.getValue()))){
+
                     int rank = CountPoint.getRankOf((UUID) entry.getKey());
                     CountPoint.pointOfEveryone.get((rank-CountPoint.pointOfEveryone.size())*-1).addPts(100);
-                    playerOfTheVictim.sendMessage("§c§l† §r§aYou target is dead alone ! §r§l+100 pts §c§l†");
+
+                    Player playerOfTheVictim = Bukkit.getPlayer((UUID) entry.getKey());
+                    if(playerOfTheVictim != null)
+                        playerOfTheVictim.sendMessage("§c§l† §r§aYou target is dead alone ! §r§l+100 pts §c§l†");
+
+
                     this.main.playersInTheParty.remove(victim.getUniqueId());
                     if(this.main.playersInTheParty.size() > 1){
                         Player newTargetPlayer = Bukkit.getPlayer(nextTarget(playerOfTheVictim.getUniqueId()));
@@ -55,10 +60,12 @@ public class DeathEvent implements Listener {
                 }
             }
         }else{
-            boolean next = true;
+            boolean doesKillerKilledTheWrongOne = true;
+
             event.setDeathMessage("§c§l† §r" + victim.getDisplayName()+ " §c§lwas killed by §r" + attacker.getPlayerListName() + " §c§l†");
+
             int rank = CountPoint.getRankOf(attacker.getUniqueId());
-            CountPoint.pointOfEveryone.get((rank-CountPoint.pointOfEveryone.size())*-1).addKill(1);
+            CountPoint.pointOfEveryone.get((rank - CountPoint.pointOfEveryone.size()) * -1).addKill(1);
             for(Map.Entry entry : StartCommand.killerTarget.entrySet()){
                 // KILLER KILL TARGET
                 if(attacker.equals(Bukkit.getPlayer((UUID) entry.getKey())) && victim.equals(Bukkit.getPlayer((UUID) entry.getValue()))){
@@ -70,7 +77,7 @@ public class DeathEvent implements Listener {
                         Player newTargetPlayer = Bukkit.getPlayer(nextTarget(attacker.getUniqueId()));
                         sendMessageOfNewTarget(attacker,newTargetPlayer);
                     }
-                    next = false;
+                    doesKillerKilledTheWrongOne = false;
                 }
                 // TARGET KILL KILLER
                 if(attacker.equals(Bukkit.getPlayer((UUID) entry.getValue())) && victim.equals(Bukkit.getPlayer((UUID) entry.getKey()))){
@@ -85,7 +92,7 @@ public class DeathEvent implements Listener {
                     attacker.sendMessage(message);
                     addBonusTo(attacker,rank);
                     victim.sendMessage("§c§l† §r§4You just died from your target §c§l† ");
-                    next = false;
+                    doesKillerKilledTheWrongOne = false;
                 }
                 if(victim.equals(Bukkit.getPlayer((UUID) entry.getValue())) && Bukkit.getPlayer((UUID) entry.getKey()).getGameMode().equals(GameMode.SURVIVAL) && !attacker.equals(Bukkit.getPlayer((UUID) entry.getKey()))){
                     Player p = Bukkit.getPlayer((UUID)entry.getKey());
@@ -100,7 +107,7 @@ public class DeathEvent implements Listener {
                 }
 
             }
-            if(next){
+            if(doesKillerKilledTheWrongOne){
                 CountPoint.pointOfEveryone.get((rank-CountPoint.pointOfEveryone.size())*-1).addPts(-300);
                 attacker.sendMessage("§c§l† §r§4You just killed your someone ! You win §r§l-300 pts §c§l† ");
             }
@@ -125,11 +132,11 @@ public class DeathEvent implements Listener {
                 p.addPotionEffect(new PotionEffect(PotionEffectType.SPEED,255555,0));
                 return;
             case 3:
-                p.addPotionEffect(new PotionEffect(PotionEffectType.DAMAGE_RESISTANCE,255555,0));
-                return;
-            case 4:
                 inv.addItem(new ItemStack(Material.DIAMOND_CHESTPLATE, 1));
                 inv.addItem(new ItemStack(Material.DIAMOND_HELMET, 1));
+                return;
+            case 4:
+                p.addPotionEffect(new PotionEffect(PotionEffectType.DAMAGE_RESISTANCE,255555,0));
                 return;
             case 5:
                 p.addPotionEffect(new PotionEffect(PotionEffectType.REGENERATION,255555,0));
@@ -146,7 +153,7 @@ public class DeathEvent implements Listener {
     private UUID nextTarget(UUID player){
         Collections.shuffle(this.main.playersInTheParty);
         int i = 0;
-        while(this.main.playersInTheParty.get(i).equals(player)){
+        while(this.main.playersInTheParty.get(i).equals(player) && Bukkit.getOfflinePlayer(this.main.playersInTheParty.get(i)).isOnline()){
             i++;
         }
         return this.main.playersInTheParty.get(i);

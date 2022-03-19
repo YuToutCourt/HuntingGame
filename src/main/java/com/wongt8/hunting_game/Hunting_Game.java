@@ -22,7 +22,7 @@ import java.util.UUID;
 public final class Hunting_Game extends JavaPlugin {
 
     public final List<FastBoard> boards = new ArrayList<FastBoard>();
-    public final List<UUID> playersInTheParty = new ArrayList<UUID>();
+    public static final List<UUID> playersInTheParty = new ArrayList<UUID>();
     public static List<UUID> setThePointForTheGame = new ArrayList<UUID>();
     public static World WORLD;
 

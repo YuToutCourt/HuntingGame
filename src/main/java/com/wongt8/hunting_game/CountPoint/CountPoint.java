@@ -97,7 +97,7 @@ public class CountPoint implements Comparable<CountPoint>{
 
     @Override
     public String toString() {
-        return ("§7"+ Bukkit.getPlayer(this.uuid).getName() + " : §a§l" + this.pts);
+        return ("§7"+ Bukkit.getOfflinePlayer(this.uuid).getName() + " : §a§l" + this.pts);
     }
 
 

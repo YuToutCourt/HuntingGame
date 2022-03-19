@@ -1,7 +1,9 @@
 package com.wongt8.hunting_game.Command;
 
+import com.wongt8.hunting_game.Hunting_Game;
 import org.bukkit.Bukkit;
 import org.bukkit.GameMode;
+import org.bukkit.OfflinePlayer;
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandExecutor;
 import org.bukkit.command.CommandSender;
@@ -24,9 +26,13 @@ public class ShowTargetCommand implements CommandExecutor {
     public boolean target(CommandSender sender){
         sender.sendMessage("---- §4Killer -> §2Target §r---- \n");
         for(Map.Entry<UUID,UUID> entry : StartCommand.killerTarget.entrySet()){
-            Player pToSendMessage = Bukkit.getPlayer((UUID) entry.getKey());
-            Player pToLocate = Bukkit.getPlayer((UUID) entry.getValue());
-            sender.sendMessage("§c" + pToSendMessage.getName() + " -> §a" + pToLocate.getName());
+            OfflinePlayer killer = Bukkit.getOfflinePlayer((UUID) entry.getKey());
+            if(Hunting_Game.playersInTheParty.contains(entry.getKey())){
+                OfflinePlayer target = Bukkit.getOfflinePlayer((UUID) entry.getValue());
+                if(killer != null && target != null){
+                    sender.sendMessage("§c" + killer.getName() + " -> §a" + target.getName());
+                }
+            }
         }
         return true;
 

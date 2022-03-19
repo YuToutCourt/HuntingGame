@@ -39,11 +39,14 @@ public class RuleCommand implements CommandExecutor {
             case 2:
                 sender.sendMessage("§9-----------Page 2/3------------");
                 sender.sendMessage("§3Rabbit   ➸ §7+§a§l1");
+                sender.sendMessage("§3Bat      ➸ §7+§a§l1");
+                sender.sendMessage("§3Chicken  ➸ §7+§a§l1");
                 sender.sendMessage("§3Ocelot   ➸ §7+§a§l2");
                 sender.sendMessage("§3Cow      ➸ §7+§a§l3");
                 sender.sendMessage("§3Pig      ➸ §7+§a§l5");
                 sender.sendMessage("§3Wolf     ➸ §7+§a§l15");
                 sender.sendMessage("§3Zombie   ➸ §7+§a§l30");
+                sender.sendMessage("§3Skeleton ➸ §7+§a§l40");
                 sender.sendMessage("§3Enderman ➸ §7+§a§l50");
                 sender.sendMessage("§3Human    ➸ §7-§c§l300");
                 sender.sendMessage("§k???§3    ➸ §7+§a§l200");
@@ -53,7 +56,6 @@ public class RuleCommand implements CommandExecutor {
             case 3:
                 sender.sendMessage("§9-----------Page 3/3------------");
                 sender.sendMessage("§3Every §rplayer §3have a §ctarget §3that will earn a lot of §apoints");
-                sender.sendMessage("§3Some §9rules §3are §e§lhidden §3from the §rplayers\n§3You maybe need to discover them");
                 return true;
             default:
                 return false;
