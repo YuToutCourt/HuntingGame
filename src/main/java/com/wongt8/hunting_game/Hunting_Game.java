@@ -43,6 +43,7 @@ public final class Hunting_Game extends JavaPlugin {
         pm.registerEvents(new DeathEvent(this),this);
         pm.registerEvents(new CustomBoss(),this);
         pm.registerEvents(new WinEvent(),this);
+        pm.registerEvents(new CutCleanEvent(),this);
         this.resetGame();
 
     }

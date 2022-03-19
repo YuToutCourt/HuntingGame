@@ -16,7 +16,7 @@ public class ShowTargetCommand implements CommandExecutor {
     @Override
     public boolean onCommand(CommandSender sender, Command command, String label, String[] args) {
         Player p = (Player) sender;
-        if("target".equalsIgnoreCase(command.getName()) && p.getGameMode().equals(GameMode.SPECTATOR)){
+        if("target".equalsIgnoreCase(command.getName()) &&  (p.getGameMode().equals(GameMode.SPECTATOR)) || p.getGameMode().equals(GameMode.CREATIVE)){
             return target(sender);
         }
         sender.sendMessage("§cYou need to be in §r§lSPECTATOR §r§cmode to use that command!");

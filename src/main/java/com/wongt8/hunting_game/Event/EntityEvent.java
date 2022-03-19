@@ -113,6 +113,12 @@ public class EntityEvent implements Listener {
                 golem.addPotionEffect(new PotionEffect(PotionEffectType.FIRE_RESISTANCE,255555,2));
                 return;
 
+            case HORSE:
+                Horse horse = (Horse) event.getEntity();
+                horse.setCustomName("§cHORSE");
+                horse.setMaxHealth(20.0);
+                return;
+
             // CANCEL SPAWN OF SOME MOBS
 
             case CREEPER:
@@ -173,6 +179,8 @@ public class EntityEvent implements Listener {
                 return 3;
             case PIG:
                 return 5;
+            case HORSE:
+                return 10;
             case WOLF:
                 return 15;
             case ZOMBIE:

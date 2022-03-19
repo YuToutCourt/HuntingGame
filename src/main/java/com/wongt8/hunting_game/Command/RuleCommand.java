@@ -44,6 +44,7 @@ public class RuleCommand implements CommandExecutor {
                 sender.sendMessage("§3Ocelot   ➸ §7+§a§l2");
                 sender.sendMessage("§3Cow      ➸ §7+§a§l3");
                 sender.sendMessage("§3Pig      ➸ §7+§a§l5");
+                sender.sendMessage("§3Horse    ➸ §7+§a§l10");
                 sender.sendMessage("§3Wolf     ➸ §7+§a§l15");
                 sender.sendMessage("§3Zombie   ➸ §7+§a§l30");
                 sender.sendMessage("§3Skeleton ➸ §7+§a§l40");
