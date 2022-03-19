@@ -3,7 +3,6 @@ package com.wongt8.hunting_game.Event;
 import com.wongt8.hunting_game.CountPoint.CountPoint;
 import com.wongt8.hunting_game.Hunting_Game;
 import com.wongt8.hunting_game.Tasks.TimerTasks;
-import org.bukkit.Bukkit;
 import org.bukkit.Material;
 import org.bukkit.entity.*;
 import org.bukkit.event.EventHandler;
@@ -159,6 +158,8 @@ public class EntityEvent implements Listener {
             if (uuidOfPlayer.equals(CountPoint.pointOfEveryone.get(index).getUuid()) && Hunting_Game.playersInTheParty.contains(uuidOfPlayer)){
                 CountPoint.pointOfEveryone.get(index).addPts(pointToAdd(mob));
                 p.sendMessage("§7+§a§l"+ pointToAdd(mob));
+
+
                 System.out.println("[Hunting Game] Point added successfully !!");
                 Collections.sort(CountPoint.pointOfEveryone);
                 break;
