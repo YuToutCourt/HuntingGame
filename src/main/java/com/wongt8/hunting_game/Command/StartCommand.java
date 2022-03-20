@@ -59,6 +59,8 @@ public class StartCommand implements CommandExecutor {
 
         Bukkit.dispatchCommand(Bukkit.getConsoleSender(), "spreadplayers 0 0 " + borderSize / 10 + " "+ (borderSize - 10) +" false @a"); //x z DistanceEntreChaquePlayer MaxRangeSurLaTp team?
 
+        Bukkit.dispatchCommand(Bukkit.getConsoleSender(),"scoreboard objectives add vie health");
+        Bukkit.dispatchCommand(Bukkit.getConsoleSender(),"scoreboard objectives setdisplay belowName vie");
 
         Collections.shuffle(listeOfPlayer);
         int i = 0;
@@ -86,7 +88,6 @@ public class StartCommand implements CommandExecutor {
             player.setExp(0);
             Inventory inv = player.getInventory();
             inv.clear();
-            inv.addItem(new ItemStack(Material.COOKED_BEEF, 64));
             this.main.playersInTheParty.add(player.getUniqueId());
             this.main.setThePointForTheGame.add(player.getUniqueId());
             i++;

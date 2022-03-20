@@ -29,8 +29,8 @@ public class CustomBoss implements Listener {
     public static void createBoss(Location location){
         Wither wither = Hunting_Game.WORLD.spawn(location,Wither.class);
         wither.setCustomName("§cBoss");
-        wither.setMaxHealth(350.0);
-        wither.setHealth(350.0);
+        wither.setMaxHealth(200.0);
+        wither.setHealth(200.0);
 
     }
 }

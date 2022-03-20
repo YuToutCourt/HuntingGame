@@ -10,6 +10,8 @@ import net.md_5.bungee.api.ChatColor;
 import org.bukkit.Bukkit;
 import org.bukkit.GameMode;
 import org.bukkit.World;
+import org.bukkit.entity.Entity;
+import org.bukkit.entity.EntityType;
 import org.bukkit.entity.Player;
 import org.bukkit.plugin.PluginManager;
 import org.bukkit.plugin.java.JavaPlugin;
@@ -45,6 +47,10 @@ public final class Hunting_Game extends JavaPlugin {
         pm.registerEvents(new WinEvent(),this);
         pm.registerEvents(new CutCleanEvent(),this);
         this.resetGame();
+
+        for(Entity entity : WORLD.getEntities()){
+            if(entity.getType() != EntityType.PLAYER) entity.remove();
+        }
 
     }
 

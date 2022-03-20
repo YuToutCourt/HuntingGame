@@ -3,6 +3,7 @@ package com.wongt8.hunting_game.Event;
 import com.wongt8.hunting_game.Command.StartCommand;
 import com.wongt8.hunting_game.CountPoint.CountPoint;
 import com.wongt8.hunting_game.Hunting_Game;
+import com.wongt8.hunting_game.Tasks.TimerTasks;
 import org.bukkit.*;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
@@ -34,6 +35,8 @@ public class DeathEvent implements Listener {
         victim.setGameMode(GameMode.SPECTATOR);
         victim.teleport(deathLocation);
         this.main.WORLD.playSound(deathLocation, Sound.ZOMBIE_REMEDY, 1000.0F, 1.0F);
+        this.main.playersInTheParty.remove(victim.getUniqueId());
+        TimerTasks.moveWorldBorder();
 
 
         if(!(attacker instanceof Player)){
@@ -52,14 +55,14 @@ public class DeathEvent implements Listener {
                         playerOfTheVictim.sendMessage("§c§l† §r§aYou target is dead alone ! §r§l+100 pts §c§l†");
 
 
-                    this.main.playersInTheParty.remove(victim.getUniqueId());
                     if(this.main.playersInTheParty.size() > 1){
-                        Player newTargetPlayer = Bukkit.getPlayer(nextTarget(playerOfTheVictim.getUniqueId()));
+                        Player newTargetPlayer = Bukkit.getPlayer(getTargetOf(victim));
                         sendMessageOfNewTarget(playerOfTheVictim,newTargetPlayer);
                     }
                 }
             }
-        }else{
+        } else {
+
             boolean doesKillerKilledTheWrongOne = true;
 
             event.setDeathMessage("§c§l† §r" + victim.getDisplayName()+ " §c§lwas killed by §r" + attacker.getPlayerListName() + " §c§l†");
@@ -67,27 +70,33 @@ public class DeathEvent implements Listener {
             int rank = CountPoint.getRankOf(attacker.getUniqueId());
             CountPoint.pointOfEveryone.get((rank - CountPoint.pointOfEveryone.size()) * -1).addKill(1);
             for(Map.Entry entry : StartCommand.killerTarget.entrySet()){
+
                 // KILLER KILL TARGET
                 if(attacker.equals(Bukkit.getPlayer((UUID) entry.getKey())) && victim.equals(Bukkit.getPlayer((UUID) entry.getValue()))){
+
                     CountPoint.pointOfEveryone.get((rank-CountPoint.pointOfEveryone.size())*-1).addPts(500);
                     attacker.sendMessage("§c§l† §r§aYou just killed your target ! §r§l+500 pts §c§l† ");
                     victim.sendMessage("§c§l† §r§4You just died from your killer §c§l†");
-                    this.main.playersInTheParty.remove(victim.getUniqueId());
+
+
                     if(this.main.playersInTheParty.size() > 1){
-                        Player newTargetPlayer = Bukkit.getPlayer(nextTarget(attacker.getUniqueId()));
+                        Player newTargetPlayer = Bukkit.getPlayer(getTargetOf(victim));
                         sendMessageOfNewTarget(attacker,newTargetPlayer);
                     }
                     doesKillerKilledTheWrongOne = false;
                 }
                 // TARGET KILL KILLER
                 if(attacker.equals(Bukkit.getPlayer((UUID) entry.getValue())) && victim.equals(Bukkit.getPlayer((UUID) entry.getKey()))){
+
                     this.main.playersInTheParty.remove(victim.getUniqueId());
-                    CountPoint.pointOfEveryone.get((rank-CountPoint.pointOfEveryone.size())*-1).addPts(100);
-                    CountPoint.pointOfEveryone.get((rank-CountPoint.pointOfEveryone.size())*-1).addKillKiller(1);
+                    CountPoint.pointOfEveryone.get((rank-CountPoint.pointOfEveryone.size()) * -1).addPts(100);
+                    CountPoint.pointOfEveryone.get((rank-CountPoint.pointOfEveryone.size()) * -1).addKillKiller(1);
+
                     String message =  "§c§l† §r§aYou just killed your killer ! You win §r§l+100 pts";
                     if(CountPoint.pointOfEveryone.get((rank-CountPoint.pointOfEveryone.size())*-1).getNbKillerKill() <= 7){
                         message += "+ permanent bonus";
                     }
+
                     message += "§c§l†";
                     attacker.sendMessage(message);
                     addBonusTo(attacker,rank);
@@ -95,22 +104,24 @@ public class DeathEvent implements Listener {
                     doesKillerKilledTheWrongOne = false;
                 }
                 if(victim.equals(Bukkit.getPlayer((UUID) entry.getValue())) && Bukkit.getPlayer((UUID) entry.getKey()).getGameMode().equals(GameMode.SURVIVAL) && !attacker.equals(Bukkit.getPlayer((UUID) entry.getKey()))){
+
                     Player p = Bukkit.getPlayer((UUID)entry.getKey());
                     int rank2 = CountPoint.getRankOf((p.getUniqueId()));
-                    CountPoint.pointOfEveryone.get((rank2-CountPoint.pointOfEveryone.size())*-1).addPts(100);
+                    CountPoint.pointOfEveryone.get((rank2-CountPoint.pointOfEveryone.size()) * -1).addPts(100);
                     p.sendMessage("§c§l† §r§aYou target is dead alone ! §r§l+100 pts §c§l†");
-                    this.main.playersInTheParty.remove(victim.getUniqueId());
+
                     if(this.main.playersInTheParty.size() > 1){
-                        Player newTargetPlayer = Bukkit.getPlayer(nextTarget(p.getUniqueId()));
+                        Player newTargetPlayer = Bukkit.getPlayer(getTargetOf(victim));
                         sendMessageOfNewTarget(p,newTargetPlayer);
                     }
                 }
 
             }
             if(doesKillerKilledTheWrongOne){
-                CountPoint.pointOfEveryone.get((rank-CountPoint.pointOfEveryone.size())*-1).addPts(-300);
+                CountPoint.pointOfEveryone.get((rank-CountPoint.pointOfEveryone.size()) * -1).addPts(-300);
                 attacker.sendMessage("§c§l† §r§4You just killed your someone ! You win §r§l-300 pts §c§l† ");
             }
+
 
 
         }
@@ -123,26 +134,26 @@ public class DeathEvent implements Listener {
         Inventory inv = p.getInventory();
         switch (nbKill){
             case 0:
-                inv.addItem(new ItemStack(Material.GOLDEN_APPLE, 8));
+                inv.addItem(new ItemStack(Material.GOLDEN_APPLE, 5));
                 return;
             case 1:
-                p.addPotionEffect(new PotionEffect(PotionEffectType.HEALTH_BOOST,255555,3));
+                inv.addItem(new ItemStack(Material.DIAMOND_CHESTPLATE, 1));
+                inv.addItem(new ItemStack(Material.DIAMOND_LEGGINGS, 1));
                 return;
             case 2:
-                p.addPotionEffect(new PotionEffect(PotionEffectType.SPEED,255555,0));
+                p.addPotionEffect(new PotionEffect(PotionEffectType.SPEED,5*60,0));
                 return;
             case 3:
-                inv.addItem(new ItemStack(Material.DIAMOND_CHESTPLATE, 1));
-                inv.addItem(new ItemStack(Material.DIAMOND_HELMET, 1));
+                p.addPotionEffect(new PotionEffect(PotionEffectType.ABSORPTION,5*60,3));
                 return;
             case 4:
-                p.addPotionEffect(new PotionEffect(PotionEffectType.DAMAGE_RESISTANCE,255555,0));
+                p.addPotionEffect(new PotionEffect(PotionEffectType.DAMAGE_RESISTANCE,5*60,0));
                 return;
             case 5:
-                p.addPotionEffect(new PotionEffect(PotionEffectType.REGENERATION,255555,0));
+                p.addPotionEffect(new PotionEffect(PotionEffectType.HEALTH_BOOST,5*60,2));
                 return;
             case 6:
-                p.addPotionEffect(new PotionEffect(PotionEffectType.INCREASE_DAMAGE,255555,0));
+                p.addPotionEffect(new PotionEffect(PotionEffectType.INCREASE_DAMAGE,5*60,0));
                 return;
             default:
                 return;
@@ -150,13 +161,14 @@ public class DeathEvent implements Listener {
 
     }
 
-    private UUID nextTarget(UUID player){
-        Collections.shuffle(this.main.playersInTheParty);
-        int i = 0;
-        while(this.main.playersInTheParty.get(i).equals(player) && Bukkit.getOfflinePlayer(this.main.playersInTheParty.get(i)).isOnline()){
-            i++;
+    private UUID getTargetOf(Player victimPlayer) {
+        for (Map.Entry<UUID, UUID> entry : StartCommand.killerTarget.entrySet()) {
+
+            if (victimPlayer.getUniqueId().equals(entry.getKey())) {
+                return entry.getValue();
+            }
         }
-        return this.main.playersInTheParty.get(i);
+        return null;
     }
 
     private void sendMessageOfNewTarget(Player player,Player newTarget){

@@ -3,6 +3,7 @@ package com.wongt8.hunting_game.Event;
 import com.wongt8.hunting_game.CountPoint.CountPoint;
 import com.wongt8.hunting_game.Hunting_Game;
 import com.wongt8.hunting_game.Tasks.TimerTasks;
+import org.bukkit.Bukkit;
 import org.bukkit.Material;
 import org.bukkit.entity.*;
 import org.bukkit.event.EventHandler;
@@ -126,9 +127,9 @@ public class EntityEvent implements Listener {
             case SPIDER:
             case GUARDIAN:
             case ENDERMITE:
+            case SHEEP:
             case MUSHROOM_COW:
             case SQUID:
-            case SHEEP:
             case WITCH:
             case SILVERFISH:
                 event.setCancelled(true);
@@ -156,8 +157,10 @@ public class EntityEvent implements Listener {
         }
         for(int index = 0; index <CountPoint.pointOfEveryone.size(); index++){
             if (uuidOfPlayer.equals(CountPoint.pointOfEveryone.get(index).getUuid()) && Hunting_Game.playersInTheParty.contains(uuidOfPlayer)){
-                CountPoint.pointOfEveryone.get(index).addPts(pointToAdd(mob));
-                p.sendMessage("§7+§a§l"+ pointToAdd(mob));
+                int point = pointToAdd(mob);
+                if(point < 0) p.sendMessage("§7-§c§l"+ point*-1);
+                else p.sendMessage("§7+§a§l"+ point);
+                CountPoint.pointOfEveryone.get(index).addPts(point);
 
 
                 System.out.println("[Hunting Game] Point added successfully !!");
@@ -172,8 +175,9 @@ public class EntityEvent implements Listener {
         switch(mob){
             case RABBIT:
             case CHICKEN:
-            case BAT:
                 return 1;
+            case BAT:
+                return getRandom(-5,5);
             case OCELOT:
                 return 2;
             case COW:
@@ -223,5 +227,9 @@ public class EntityEvent implements Listener {
 
         }
 
+    }
+
+    private int getRandom(int min, int max) {
+        return (int) (Math.random() * (max - min)) + min;
     }
 }

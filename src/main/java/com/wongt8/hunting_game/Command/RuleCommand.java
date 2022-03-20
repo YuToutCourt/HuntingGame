@@ -2,6 +2,7 @@ package com.wongt8.hunting_game.Command;
 
 import com.wongt8.hunting_game.Hunting_Game;
 import com.wongt8.hunting_game.Tasks.TimerTasks;
+import org.bukkit.Bukkit;
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandExecutor;
 import org.bukkit.command.CommandSender;
@@ -29,7 +30,7 @@ public class RuleCommand implements CommandExecutor {
             case 1:
                 sender.sendMessage("§9-----------Page 1/3------------");
                 sender.sendMessage("§3Earn §apoints §3by killing prey");
-                if(!TimerTasks.RUN) sender.sendMessage("§3The §2game §3end when a §rplayer §3collects §r??? §apoints !");
+                if(!TimerTasks.RUN) sender.sendMessage("§3The §2game §3end when a §rplayer §3collects §a"+500* Bukkit.getOnlinePlayers().size()  + " §apoints !");
                 else{
                     int nbPtsToCompleteTheGame = 500*Hunting_Game.setThePointForTheGame.size();
                     sender.sendMessage("§3The §2game §3end when a §rplayer §3collects §a"+nbPtsToCompleteTheGame +" points !");
@@ -39,7 +40,7 @@ public class RuleCommand implements CommandExecutor {
             case 2:
                 sender.sendMessage("§9-----------Page 2/3------------");
                 sender.sendMessage("§3Rabbit   ➸ §7+§a§l1");
-                sender.sendMessage("§3Bat      ➸ §7+§a§l1");
+                sender.sendMessage("§3Bat      ➸ §7-§c§l5/§7+§a§l5");
                 sender.sendMessage("§3Chicken  ➸ §7+§a§l1");
                 sender.sendMessage("§3Ocelot   ➸ §7+§a§l2");
                 sender.sendMessage("§3Cow      ➸ §7+§a§l3");
@@ -57,6 +58,7 @@ public class RuleCommand implements CommandExecutor {
             case 3:
                 sender.sendMessage("§9-----------Page 3/3------------");
                 sender.sendMessage("§3Every §rplayer §3have a §ctarget §3that will earn a lot of §apoints");
+                sender.sendMessage("§3Be careful, mobs can attack you!!");
                 return true;
             default:
                 return false;

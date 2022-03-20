@@ -1,8 +1,5 @@
 package com.wongt8.hunting_game.Event;
 
-import com.wongt8.hunting_game.CountPoint.CountPoint;
-import com.wongt8.hunting_game.Hunting_Game;
-import com.wongt8.hunting_game.Tasks.TimerTasks;
 import org.bukkit.Material;
 import org.bukkit.block.Block;
 import org.bukkit.entity.EntityType;
@@ -14,8 +11,6 @@ import org.bukkit.event.entity.EntityDeathEvent;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.meta.ItemMeta;
 
-import java.util.Collections;
-import java.util.UUID;
 
 public class CutCleanEvent implements Listener {
 
@@ -45,6 +40,9 @@ public class CutCleanEvent implements Listener {
             switch (item.getType()) {
                 case RAW_CHICKEN:
                     item.setType(Material.COOKED_CHICKEN);
+                    continue;
+                case PORK:
+                    item.setType(Material.GRILLED_PORK);
                     continue;
                 case RAW_BEEF:
                     item.setType(Material.COOKED_BEEF);

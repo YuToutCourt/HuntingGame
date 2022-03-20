@@ -1,5 +1,6 @@
 package com.wongt8.hunting_game.Tasks;
 
+import com.wongt8.hunting_game.ActionBar.ActionBarC;
 import com.wongt8.hunting_game.Command.StartCommand;
 import com.wongt8.hunting_game.CountPoint.CountPoint;
 import com.wongt8.hunting_game.CustomMob.CustomBoss;
@@ -34,7 +35,7 @@ public class TimerTasks extends BukkitRunnable {
 		this.updateBoards();
 		
 		if(RUN) {
-			if(time%300 == 0)sendTargetLocation();
+			if(time % 300 == 0) sendTargetLocation();
 			if(time == 10) this.main.WORLD.setDifficulty(Difficulty.NORMAL);
 			time ++;
 			if(WBstate < 2) WBtime --; // changing wb timer only if not finished
@@ -43,7 +44,7 @@ public class TimerTasks extends BukkitRunnable {
 				WBstate ++;
 			}
 			if(WBtime == 0 && WBstate == 1) { // worldborder ends moving
-				WBstate ++;
+				WBstate++;
 			}
 			if (time >= 1200 && time%1200 == 0 && !boss) spawnGolem();
 
@@ -59,7 +60,7 @@ public class TimerTasks extends BukkitRunnable {
 		}
 		
 	}
-	
+
 	public static void setRunning(boolean state) {
 		RUN = state;
 	}
@@ -98,16 +99,29 @@ public class TimerTasks extends BukkitRunnable {
 			board.updateLine(8, formatLine("Kill", CountPoint.getNbKillOf(board.getPlayer().getUniqueId())));
 			board.updateLine(10, formatLine("Border", formatTime(WBtime, false)));
 			board.updateLine(11, formatLine("Size", (int)this.main.WORLD.getWorldBorder().getSize()));
+
+			if(Hunting_Game.playersInTheParty.contains(board.getPlayer().getUniqueId())) {
+				Location loc = board.getPlayer().getLocation();
+				String locStr = "§c§lx §r§6> " + loc.getBlockX() + "§f, §c§ly §r§6> " + loc.getBlockY() + "§f, §c§lz §r§6> " + loc.getBlockZ();
+
+				ActionBarC actionBar = new ActionBarC(locStr);
+				actionBar.sendToPlayer(board.getPlayer());
+			}
         }
 	}
 
 	private void sendTargetLocation(){
 		for(Map.Entry entry : StartCommand.killerTarget.entrySet()) {
+
 			Player pToSendMessage = Bukkit.getPlayer((UUID) entry.getKey());
-			Player pToLocate = Bukkit.getPlayer((UUID) entry.getValue());
-			if (pToLocate != null && pToLocate.getGameMode().equals(GameMode.SURVIVAL) && pToSendMessage != null) {
-				Location location = pToLocate.getLocation();
-				pToSendMessage.sendMessage("§eCoordonate of your target : §c§lx §r§6> " + location.getBlockX() + "§f, §c§ly §r§6> " + location.getBlockY() + "§f, §c§lz §r§6> " + location.getBlockZ());
+
+			if(pToSendMessage.getGameMode() == GameMode.SURVIVAL) {
+
+				Player pToLocate = Bukkit.getPlayer((UUID) entry.getValue());
+				if (pToLocate != null && pToLocate.getGameMode().equals(GameMode.SURVIVAL) && pToSendMessage != null) {
+					Location location = pToLocate.getLocation();
+					pToSendMessage.sendMessage("§eCoordonate of your target : §c§lx §r§6> " + location.getBlockX() + "§f, §c§ly §r§6> " + location.getBlockY() + "§f, §c§lz §r§6> " + location.getBlockZ());
+				}
 			}
 		}
 	}
@@ -130,14 +144,16 @@ public class TimerTasks extends BukkitRunnable {
 		return random == 0 ? number*-1 : number;
 	}
 
-	private void moveWorldBorder() {
-		this.main.WORLD.playSound(this.main.WORLD.getSpawnLocation(), Sound.ANVIL_LAND, 1000.0F, 1.0F);
-		List<UUID> listeOfPlayer= new ArrayList<UUID>();
-		for(Player player : Bukkit.getOnlinePlayers()){listeOfPlayer.add(player.getUniqueId());}
-		int endSize = (listeOfPlayer.size()*100)/4;
+	public static void moveWorldBorder() {
+		Hunting_Game.WORLD.playSound(Hunting_Game.WORLD.getSpawnLocation(), Sound.ANVIL_LAND, 1000.0F, 1.0F);
+		List<UUID> listOfPlayer= new ArrayList<UUID>();
+		for(Player player : Bukkit.getOnlinePlayers()){
+			if(player.getGameMode() == GameMode.SURVIVAL) listOfPlayer.add(player.getUniqueId());
+		}
+		int endSize = (listOfPlayer.size()*100)/4;
 		int duration = 1200;
 		WBtime = duration;
-		this.main.WORLD.getWorldBorder().setSize(endSize, duration);
+		Hunting_Game.WORLD.getWorldBorder().setSize(endSize, duration);
 		Bukkit.broadcastMessage("§c§lBorder is now moving");
 	}
 }
