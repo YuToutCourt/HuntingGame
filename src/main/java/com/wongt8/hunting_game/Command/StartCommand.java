@@ -88,6 +88,7 @@ public class StartCommand implements CommandExecutor {
             player.setExp(0);
             Inventory inv = player.getInventory();
             inv.clear();
+            inv.addItem(new ItemStack(Material.COOKED_BEEF, 64));
             this.main.playersInTheParty.add(player.getUniqueId());
             this.main.setThePointForTheGame.add(player.getUniqueId());
             i++;
