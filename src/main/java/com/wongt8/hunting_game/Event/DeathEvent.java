@@ -81,7 +81,7 @@ public class DeathEvent implements Listener {
 
                     if(this.main.playersInTheParty.size() > 1){
                         Player newTargetPlayer = Bukkit.getPlayer(getTargetOf(victim));
-                        sendMessageOfNewTarget(attacker,newTargetPlayer);
+                        sendMessageOfNewTarget(attacker, newTargetPlayer);
                     }
                     doesKillerKilledTheWrongOne = false;
                 }
